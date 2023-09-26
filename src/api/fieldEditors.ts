@@ -52,4 +52,13 @@ namespace rpg {
     export function _partyType(partyType: PartyType): number {
         return partyType;
     }
+
+    //% block="$region"
+    //% shim=TD_ID
+    //% blockId=rpg_screenRegion
+    //% duplicateShadowOnDrag=true
+    //% blockHidden=true
+    export function _screenRegion(region: ScreenRegion): number {
+        return region;
+    }
 }

@@ -145,7 +145,7 @@ namespace rpg {
     //% block="$character add skill $skill"
     //% character.shadow=variables_get
     //% character.defl=myCharacter
-    //% skill.shadow=rpg_skillNameShadow
+    //% skill.shadow=rpg_character_skill
     //% subcategory=Characters
     //% group=Skills
     //% weight=80
@@ -209,7 +209,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=100
-    export function addToParty(character: Entity, party: PartyType): void {
+    export function addToParty(character: Entity, party: number): void {
         _assertCharacter(character, "addToParty");
 
         if (party === PartyType.Player) {
@@ -226,7 +226,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=90
-    export function getParty(party: PartyType): Entity[] {
+    export function getParty(party: number): Entity[] {
         if (party === PartyType.Player) {
             return _globalState().playerParty.getAll();
         }
@@ -242,7 +242,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=80
-    export function getPartyCharacter(party: PartyType, name: string): Entity {
+    export function getPartyCharacter(party: number, name: string): Entity {
         if (party === PartyType.Player) {
             return _globalState().playerParty.getByName(name);
         }
@@ -258,7 +258,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=70
-    export function removeFromParty(party: PartyType, name: string): void {
+    export function removeFromParty(party: number, name: string): void {
         if (party === PartyType.Player) {
             _globalState().playerParty.removeByName(name);
         }

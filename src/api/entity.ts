@@ -11,6 +11,9 @@ namespace rpg {
     //% stat.shadow=rpg_statNameShadow
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=100
     export function setStat(entity: Entity, stat: string, kind: StatKind, value: number) {
         if (kind === StatKind.GrowthRate) {
             entity.growthRates.setStat(stat, value);
@@ -25,6 +28,9 @@ namespace rpg {
     //% stat.shadow=rpg_statNameShadow
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=90
     export function changeStat(entity: Entity, stat: string, kind: StatKind, value: number) {
         if (kind === StatKind.GrowthRate) {
             entity.growthRates.changeStat(stat, value);
@@ -39,6 +45,9 @@ namespace rpg {
     //% stat.shadow=rpg_statNameShadow
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=80
     export function getStat(entity: Entity, stat: string, kind: StatKind) {
         if (kind === StatKind.GrowthRate) {
             return entity.growthRates.getStat(stat);
@@ -48,23 +57,13 @@ namespace rpg {
         }
     }
 
-    //% blockId=rpg_entity_getValue
-    //% block="$entity $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
-    export function getValue(entity: Entity, value: EntityValue) {
-        switch (value) {
-            case EntityValue.Health:
-                return entity.health;
-            case EntityValue.Level:
-                return entity.level;
-        }
-    }
-
     //% blockId=rpg_entity_setValue
     //% block="$entity set $value to v$al"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=70
     export function setValue(entity: Entity, value: EntityValue, val: number) {
         switch (value) {
             case EntityValue.Health:
@@ -80,14 +79,36 @@ namespace rpg {
     //% block="$entity change $value by $val"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=60
     export function changeValueBy(entity: Entity, value: EntityValue, val: number) {
         setValue(entity, value, getValue(entity, value) + val);
+    }
+
+    //% blockId=rpg_entity_getValue
+    //% block="$entity $value"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=50
+    export function getValue(entity: Entity, value: EntityValue) {
+        switch (value) {
+            case EntityValue.Health:
+                return entity.health;
+            case EntityValue.Level:
+                return entity.level;
+        }
     }
 
     //% blockId=rpg_entity_levelUp
     //% block="$entity level up"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=40
     export function levelUp(entity: Entity) {
         entity.levelUp();
     }
@@ -96,6 +117,9 @@ namespace rpg {
     //% block="$entity set damage equation to $equation"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Damage
+    //% weight=100
     export function setDamageEquation(entity: Entity, equation: rpg.equation.ExpressionNode | number) {
         entity.damage = rpg.equation.wrapNode(equation);
     }
@@ -106,6 +130,9 @@ namespace rpg {
     //% attacker.defl=myEntity
     //% defender.shadow=variables_get
     //% defender.defl=defender
+    //% subcategory=Entity
+    //% group=Damage
+    //% weight=90
     export function dealDamage(attacker: Entity, defender: Entity) {
         const damage = rpg.equation.evaluateDamageExpression(attacker.damage, defender, attacker, attacker);
         defender.health = Math.max(defender.health - damage, 0);
@@ -119,6 +146,9 @@ namespace rpg {
     //% defender.defl=defender
     //% damageSource.shadow=variables_get
     //% damageSource.defl=myEntity
+    //% subcategory=Entity
+    //% group=Damage
+    //% weight=80
     export function dealDamageWith(attacker: Entity, damageSource: Entity, defender: Entity) {
         const damage = rpg.equation.evaluateDamageExpression(damageSource.damage, defender, damageSource, attacker);
         defender.health = Math.max(defender.health - damage, 0);
@@ -130,6 +160,9 @@ namespace rpg {
     //% entity.defl=myEntity
     //% sprite.shadow=variables_get
     //% sprite.defl=mySprite
+    //% subcategory=Entity
+    //% group=Sprites
+    //% weight=100
     export function attachToSprite(entity: Entity, sprite: Sprite) {
         if (sprite) {
             sprite.data["$attached_entity"] = entity;
@@ -143,6 +176,9 @@ namespace rpg {
     //% block="$sprite attached entity"
     //% sprite.shadow=variables_get
     //% sprite.defl=mySprite
+    //% subcategory=Entity
+    //% group=Sprites
+    //% weight=90
     export function getAttachedEntity(sprite: Sprite): Entity {
         return sprite.data["$attached_entity"];
     }
@@ -151,6 +187,9 @@ namespace rpg {
     //% block="$entity attached sprite"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Sprites
+    //% weight=80
     export function getAttachedSprite(entity: Entity): Sprite {
         return entity.attachedSprite;
     }
