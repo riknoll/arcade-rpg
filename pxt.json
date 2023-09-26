@@ -1,0 +1,37 @@
+{
+    "name": "arcade-rpg",
+    "version": "0.0.0",
+    "files": [
+        "main.ts",
+        "src/util.ts",
+        "src/equation.ts",
+        "src/stat.ts",
+        "src/entity.ts",
+        "src/entityRegistry.ts",
+        "src/equipment.ts",
+        "src/character.ts",
+        "src/globalState.ts",
+        "src/ui/state.ts",
+        "src/ui/region.ts",
+        "src/ui/compoundSprite.ts",
+        "src/ui/frameSprite.ts",
+        "src/ui/displaySprite.ts",
+        "src/ui/textLog.ts",
+        "src/api/character.ts",
+        "src/api/equation.ts",
+        "src/api/ui.ts",
+        "src/api/fieldEditors.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "supportedTargets": [
+        "arcade"
+    ],
+    "dependencies": {
+        "device": "*",
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#master",
+        "arcade-fancy-text": "github:riknoll/arcade-fancy-text#v0.0.13"
+    },
+    "testDependencies": {}
+}
