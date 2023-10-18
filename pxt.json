@@ -1,6 +1,6 @@
 {
     "name": "arcade-rpg",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "files": [
         "main.ts",
         "src/util.ts",
@@ -20,7 +20,8 @@
         "src/api/character.ts",
         "src/api/equation.ts",
         "src/api/ui.ts",
-        "src/api/fieldEditors.ts"
+        "src/api/fieldEditors.ts",
+        "src/api/entity.ts"
     ],
     "testFiles": [
         "test.ts"

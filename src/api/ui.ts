@@ -100,6 +100,8 @@ namespace rpg {
 
     //% blockId=rpg_ui_showDisplay
     //% block="show display of $source $type in $region"
+    //% source.shadow=variables_get
+    //% source.defl=myEntity
     //% region.shadow=rpg_screenRegion
     //% subcategory=Display
     //% group=Display
