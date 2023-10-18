@@ -14,12 +14,10 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Create
     //% weight=100
-    export function createCharacter(name: string): Entity {
+    export function createCharacter(name: string): void {
         const c = new Character();
         c.name = name;
         _globalState().characters.add(c);
-
-        return c as Entity;
     }
 
     //% blockId=rpg_character_character
@@ -38,12 +36,10 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Equipment
     //% weight=100
-    export function createEquipment(name: string): Entity {
+    export function createEquipment(name: string): void {
         const e = new Entity();
         e.name = name;
         _globalState().equipment.add(e);
-
-        return e;
     }
 
     //% blockId=rpg_character_equipment
@@ -123,12 +119,10 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Skills
     //% weight=100
-    export function createSkill(name: string): Entity {
+    export function createSkill(name: string): void {
         const e = new Entity();
         e.name = name;
         _globalState().skills.add(e);
-
-        return e;
     }
 
     //% blockId=rpg_character_skill

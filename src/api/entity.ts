@@ -1,3 +1,4 @@
+//% color="#a85432"
 namespace rpg {
     export enum StatKind {
         //% block="stat"
@@ -11,6 +12,8 @@ namespace rpg {
     //% stat.shadow=rpg_statNameShadow
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% stat.defl="attack"
+    //% inlineInputMode=inline
     //% subcategory=Entity
     //% group=Stats
     //% weight=100
@@ -28,6 +31,8 @@ namespace rpg {
     //% stat.shadow=rpg_statNameShadow
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% stat.defl="attack"
+    //% inlineInputMode=inline
     //% subcategory=Entity
     //% group=Stats
     //% weight=90
@@ -45,6 +50,8 @@ namespace rpg {
     //% stat.shadow=rpg_statNameShadow
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% stat.defl="attack"
+    //% inlineInputMode=inline
     //% subcategory=Entity
     //% group=Stats
     //% weight=80
@@ -58,9 +65,10 @@ namespace rpg {
     }
 
     //% blockId=rpg_entity_setValue
-    //% block="$entity set $value to v$al"
+    //% block="$entity set $value to $val"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% inlineInputMode=inline
     //% subcategory=Entity
     //% group=Stats
     //% weight=70
