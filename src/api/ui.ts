@@ -119,36 +119,6 @@ namespace rpg {
         rpg.ui._state().closeAllMenus();
     }
 
-    //% blockId=rpg_ui_setMenuFrame
-    //% block="set menu frame $frame"
-    //% frame.shadow=dialog_image_picker
-    //% subcategory=UI
-    //% group=Style
-    //% weight=100
-    //% blockGap=8
-    export function setMenuFrame(frame: Image) {
-        rpg.ui._state().setFrame(frame);
-    }
-
-    //% blockId=rpg_ui_setMenuTextColor
-    //% block="set menu colors foreground $foregroundColor background $backgroundColor"
-    //% subcategory=UI
-    //% group=Style
-    //% weight=90
-    //% blockGap=8
-    export function setMenuTextColor(foregroundColor: number, backgroundColor: number) {
-        rpg.ui._state().setTextColor(foregroundColor, backgroundColor);
-    }
-
-    //% blockId=rpg_ui_setMenuSelectedTextColor
-    //% block="set menu selected colors foreground $foregroundColor background $backgroundColor"
-    //% subcategory=UI
-    //% group=Style
-    //% weight=80
-    export function setMenuSelectedTextColor(foregroundColor: number, backgroundColor: number) {
-        rpg.ui._state().setSelectedTextColor(foregroundColor, backgroundColor);
-    }
-
     //% blockId=rpg_ui_showDisplay
     //% block="show display of $source $type in $region"
     //% source.shadow=variables_get
@@ -239,6 +209,40 @@ namespace rpg {
         rpg.ui.log.setVisible(visible);
     }
 
+    //% blockId=rpg_ui_setMenuFrame
+    //% block="set menu frame $frame"
+    //% frame.shadow=dialog_image_picker
+    //% subcategory=UI
+    //% group=Style
+    //% weight=100
+    //% blockGap=8
+    export function setMenuFrame(frame: Image) {
+        rpg.ui._state().setFrame(frame);
+    }
+
+    //% blockId=rpg_ui_setMenuTextColor
+    //% block="set menu colors foreground $foregroundColor background $backgroundColor"
+    //% foregroundColor.shadow=colorindexpicker
+    //% backgroundColor.shadow=colorindexpicker
+    //% subcategory=UI
+    //% group=Style
+    //% weight=90
+    //% blockGap=8
+    export function setMenuTextColor(foregroundColor: number, backgroundColor: number) {
+        rpg.ui._state().setTextColor(foregroundColor, backgroundColor);
+    }
+
+    //% blockId=rpg_ui_setMenuSelectedTextColor
+    //% block="set menu selected colors foreground $foregroundColor background $backgroundColor"
+    //% foregroundColor.shadow=colorindexpicker
+    //% backgroundColor.shadow=colorindexpicker
+    //% subcategory=UI
+    //% group=Style
+    //% weight=80
+    export function setMenuSelectedTextColor(foregroundColor: number, backgroundColor: number) {
+        rpg.ui._state().setSelectedTextColor(foregroundColor, backgroundColor);
+    }
+
     //% blockId=rpg_ui_setTextLogFrame
     //% block="set text log frame $frame"
     //% frame.shadow=dialog_image_picker
@@ -252,6 +256,7 @@ namespace rpg {
 
     //% blockId=rpg_ui_setTextLogTextColor
     //% block="set text log text color $color"
+    //% color.shadow=colorindexpicker
     //% subcategory=UI
     //% group=Style
     //% weight=40
