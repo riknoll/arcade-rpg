@@ -114,11 +114,22 @@ namespace rpg {
         return new rpg.equation.EntityValueNode(owner, kind);
     }
 
+    //% blockId=rpg_equation_entityNumberDataExpression
+    //% block="$owner data $key as number"
+    //% owner.shadow=rpg_equation_participantExpression
+    //% key.shadow=rpg_dataNumberKeyShadow
+    //% subcategory=Equation
+    //% group=Entity
+    //% weight=80
+    export function entityNumberDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.ExpressionNode {
+        return new rpg.equation.NumberDataNode(owner, key);
+    }
+
     //% blockId=rpg_equation_participantExpression
     //% block="$owner"
     //% subcategory=Equation
     //% group=Entity
-    //% weight=80
+    //% weight=70
     export function participantExpression(owner: ParticipantType): rpg.equation.EntityExpressionNode {
         return new rpg.equation.ParticipantExpression(owner);
     }
@@ -128,9 +139,20 @@ namespace rpg {
     //% equipSlot.shadow=rpg_equipmentSlotNameShadow
     //% subcategory=Equation
     //% group=Entity
-    //% weight=70
+    //% weight=60
     export function equipmentExpression(owner: ParticipantType, equipSlot: string): rpg.equation.EntityExpressionNode {
         return new rpg.equation.EquipmentExpression(owner, equipSlot);
+    }
+
+    //% blockId=rpg_equation_entityEntityDataExpression
+    //% block="$owner data $key as entity"
+    //% owner.shadow=rpg_equation_participantExpression
+    //% key.shadow=rpg_dataEntityKeyShadow
+    //% subcategory=Equation
+    //% group=Entity
+    //% weight=50
+    export function entityEntityDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.EntityExpressionNode {
+        return new rpg.equation.EntityDataExpression(owner, key);
     }
 
     //% blockId=rpg_equation_ternaryExpression
@@ -175,5 +197,16 @@ namespace rpg {
     //% weight=70
     export function notExpression(expr: rpg.equation.LogicalExpressionNode): rpg.equation.LogicalExpressionNode {
         return new rpg.equation.NotExpression(expr);
+    }
+
+    //% blockId=rpg_equation_entityBooleanDataExpression
+    //% block="$owner data $key as boolean"
+    //% owner.shadow=rpg_equation_participantExpression
+    //% key.shadow=rpg_dataBooleanKeyShadow
+    //% subcategory=Equation
+    //% group=Logic
+    //% weight=60
+    export function entityBooleanDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.LogicalExpressionNode {
+        return new rpg.equation.BooleanDataExpression(owner, key);
     }
 }

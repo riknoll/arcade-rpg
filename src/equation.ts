@@ -4,21 +4,23 @@ namespace rpg.equation {
         UnaryExpression,
         Literal,
         Stat,
-        Equipment,
         EntityValue,
         RandomRange,
-        TernaryExpression
+        TernaryExpression,
+        NumberData
     }
 
     export enum LogicalExpressionNodeKind {
         ComparisonExpression,
         BinaryLogicExpression,
         NotExpression,
+        BooleanData
     }
 
     export enum EntityExpressionNodeKind {
         Participant,
-        Equipment
+        Equipment,
+        EntityData
     }
 
     export class ExpressionNode {
@@ -62,6 +64,12 @@ namespace rpg.equation {
         }
     }
 
+    export class NumberDataNode extends ExpressionNode {
+        constructor(public owner: EntityExpressionNode, public key: string) {
+            super(ExpressionNodeKind.NumberData);
+        }
+    }
+
     export class TernaryExpression extends ExpressionNode {
         constructor(public condition: LogicalExpressionNode, public ifTrue: ExpressionNode, public ifFalse: ExpressionNode) {
             super(ExpressionNodeKind.TernaryExpression);
@@ -91,6 +99,12 @@ namespace rpg.equation {
         }
     }
 
+    export class BooleanDataExpression extends LogicalExpressionNode {
+        constructor(public owner: EntityExpressionNode, public key: string) {
+            super(LogicalExpressionNodeKind.BooleanData);
+        }
+    }
+
     export class EntityExpressionNode {
         constructor(public kind: EntityExpressionNodeKind) {
         }
@@ -98,13 +112,19 @@ namespace rpg.equation {
 
     export class ParticipantExpression extends EntityExpressionNode {
         constructor(public owner: ParticipantType) {
-            super(EntityExpressionNodeKind.Participant)
+            super(EntityExpressionNodeKind.Participant);
         }
     }
 
     export class EquipmentExpression extends EntityExpressionNode {
         constructor(public owner: ParticipantType, public equipSlot: string) {
-            super(EntityExpressionNodeKind.Equipment)
+            super(EntityExpressionNodeKind.Equipment);
+        }
+    }
+
+    export class EntityDataExpression extends EntityExpressionNode {
+        constructor(public owner: EntityExpressionNode, public key: string) {
+            super(EntityExpressionNodeKind.EntityData);
         }
     }
 
@@ -170,6 +190,12 @@ namespace rpg.equation {
                 else {
                     return evaluateDamageExpression(texpr.ifFalse, defender, damageSource, attacker);
                 }
+            case ExpressionNodeKind.NumberData:
+                const dOwner = evaluateEntityExpression((expr as NumberDataNode).owner, defender, damageSource, attacker);
+                if (!dOwner) {
+                    return 0;
+                }
+                return rpg.data.getNumber(dOwner, (expr as NumberDataNode).key) || 0;
         }
 
         return 0;
@@ -207,6 +233,12 @@ namespace rpg.equation {
                     case ComparisonOperator.LessThanEquals:
                         return leftValue <= rightValue;
                 }
+            case LogicalExpressionNodeKind.BooleanData:
+                const dOwner = evaluateEntityExpression((expr as BooleanDataExpression).owner, defender, damageSource, attacker);
+                if (!dOwner) {
+                    return false;
+                }
+                return !!rpg.data.getBoolean(dOwner, (expr as BooleanDataExpression).key);
         }
 
         return false;
@@ -222,6 +254,14 @@ namespace rpg.equation {
                     _assertCharacter(owner, "evaluateEntityExpression");
                     return (owner as Character).equipment.getEquip((expr as EquipmentExpression).equipSlot);
                 }
+                break;
+            case EntityExpressionNodeKind.EntityData:
+                const ownerEntity = evaluateEntityExpression((expr as EntityDataExpression).owner, defender, damageSource, attacker);
+
+                if (ownerEntity) {
+                    return rpg.data.getEntity(ownerEntity, (expr as EntityDataExpression).key);
+                }
+                break;
         }
 
         return undefined;
