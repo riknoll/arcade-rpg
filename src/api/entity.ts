@@ -7,6 +7,31 @@ namespace rpg {
         GrowthRate
     }
 
+    //% blockId=rpg_create_entity
+    //% block="create entity $entity"
+    //% inlineInputMode=inline
+    //% subcategory=Entity
+    //% group=Create
+    //% weight=200
+    export function createEntity(name: string) {
+        const result = new Entity();
+        result.name = name;
+        return result;
+    }
+
+    //% blockId=rpg_clone_entity
+    //% block="clone entity $entity||and all children $deep"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% deep.defl=false
+    //% inlineInputMode=inline
+    //% subcategory=Entity
+    //% group=Create
+    //% weight=100
+    export function cloneEntity(entity: Entity, deep = false) {
+        return entity.clone(deep);
+    }
+
     //% blockId=rpg_entity_setStat
     //% block="set $entity $stat $kind to $value"
     //% stat.shadow=rpg_statNameShadow
@@ -121,6 +146,28 @@ namespace rpg {
         entity.levelUp();
     }
 
+    //% blockId=rpg_entity_setName
+    //% block="$entity set name to $name"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=30
+    export function setName(entity: Entity, name: string): void {
+        entity.name = name;
+    }
+
+    //% blockId=rpg_entity_getName
+    //% block="$entity name"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=20
+    export function getName(entity: Entity): string {
+        return entity.name;
+    }
+
     //% blockId=rpg_entity_setDamageEquation
     //% block="$entity set damage equation to $equation"
     //% entity.shadow=variables_get
@@ -200,5 +247,79 @@ namespace rpg {
     //% weight=80
     export function getAttachedSprite(entity: Entity): Sprite {
         return entity.attachedSprite;
+    }
+
+    //% blockId=rpg_entity_sortByStat
+    //% block="sort $entities by stat $stat||in ascending order $ascending"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% stat.shadow=rpg_statNameShadow
+    //% ascending.defl=true
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=100
+    export function sortByStat(entities: Entity[], stat: string, ascending = true) {
+        const result = entities.slice();
+
+        result.sort((a, b) => a.stats.getStat(stat) - b.stats.getStat(stat));
+
+        if (!ascending) {
+            result.reverse();
+        }
+
+        return result;
+    }
+
+    //% blockId=rpg_entity_sortByValue
+    //% block="sort $entities by $value||in ascending order $ascending"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% ascending.defl=true
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=90
+    export function sortByValue(entities: Entity[], value: EntityValue, ascending = true) {
+        const result = entities.slice();
+
+        result.sort((a, b) => getValue(a, value) - getValue(b, value));
+
+        if (!ascending) {
+            result.reverse();
+        }
+
+        return result;
+    }
+
+    //% blockId=rpg_entity_sortByName
+    //% block="sort $entities by name||in ascending order $ascending"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% ascending.defl=true
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=80
+    export function sortByName(entities: Entity[], ascending = true) {
+        const result = entities.slice();
+        result.sort();
+
+        if (!ascending) {
+            result.reverse();
+        }
+
+        return result;
+    }
+
+    //% blockId=rpg_entity_concat
+    //% block="concatenate $a and $b"
+    //% a.shadow=variables_get
+    //% a.defl=entityList
+    //% b.shadow=variables_get
+    //% b.defl=otherEntityList
+    //% ascending.defl=true
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=70
+    export function concat(a: Entity[], b: Entity[]): Entity[] {
+        return a.concat(b);
     }
 }

@@ -84,6 +84,15 @@ namespace rpg.ui {
             this.addChild(right, frameUnit + left.width, frameUnit);
         }
 
+        setTextColor(foregroundColor: number, backgroundColor: number) {
+            for (const child of this.children) {
+                if (child instanceof miniMenu.MenuSprite) {
+                    (child as miniMenu.MenuSprite).setStyleProperty(miniMenu.StyleKind.All, miniMenu.StyleProperty.Background, backgroundColor);
+                    (child as miniMenu.MenuSprite).setStyleProperty(miniMenu.StyleKind.All, miniMenu.StyleProperty.Foreground, foregroundColor);
+                }
+            }
+        }
+
         setColumns(columns: string[][]) {
             this.columns = columns.map(c => c.slice());
             this.updateBounds();
@@ -110,7 +119,7 @@ namespace rpg.ui {
             case DisplayType.Skills:
                 _assertCharacter(source, "createDisplaySprite");
                 result.setColumns([
-                    (source as Character).skills.map(s => s.name)
+                    (source as Character).skills.getAll().map(s => s.name)
                 ]);
                 break;
         }

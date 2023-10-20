@@ -53,6 +53,25 @@ namespace rpg {
 
             return equips;
         }
+
+        clone(deep: boolean) {
+            const result = new Equipment();
+
+            for (const slot of this.equipment) {
+                if (deep) {
+                    result.setEquip(slot.kind, slot.value.clone());
+                }
+                else {
+                    result.setEquip(slot.kind, slot.value);
+                }
+            }
+
+            return result;
+        }
+
+        getAll() {
+            return this.equipment.map(e => e.value);
+        }
     }
 
     function stringCompare(a: string, b: string) {

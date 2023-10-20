@@ -15,6 +15,7 @@ namespace rpg {
         equipment: EntityRegistry;
         playerParty: EntityRegistry;
         enemyParty: EntityRegistry;
+        items: EntityRegistry;
 
         constructor() {
             this.characters = new EntityRegistry();
@@ -22,6 +23,7 @@ namespace rpg {
             this.equipment = new EntityRegistry();
             this.playerParty = new EntityRegistry();
             this.enemyParty = new EntityRegistry();
+            this.items = new EntityRegistry();
         }
     }
 }

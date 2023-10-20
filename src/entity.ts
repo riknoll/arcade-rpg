@@ -15,6 +15,7 @@ namespace rpg {
         health: number;
         damage: rpg.equation.ExpressionNode;
         attachedSprite: Sprite;
+        data: any;
 
         constructor() {
             this.flags = 0;
@@ -24,6 +25,7 @@ namespace rpg {
             this.growthRates = new Stats();
             this.health = 0;
             this.damage = new rpg.equation.LiteralNode(0);
+            this.data = {};
         }
 
         levelUp() {
@@ -75,6 +77,20 @@ namespace rpg {
                     if (allocatedStats >= totalStats) break;
                 }
             }
+        }
+
+        clone(deep?: boolean) {
+            const result = new Entity();
+            result.name = this.name;
+            result.stats = this.stats.clone();
+            result.growthRates = this.growthRates.clone();
+            result.level = this.level;
+            result.health = this.health;
+            result.damage = this.damage;
+            result.statsPerLevel = this.statsPerLevel;
+            result.flags = this.flags;
+            result.data = {...this.data};
+            return result;
         }
 
         protected randomLevelUp() {

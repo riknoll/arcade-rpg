@@ -46,34 +46,55 @@ namespace rpg {
     //% options.shadow=lists_create_with
     //% options.defl=text
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Menu
     //% weight=100
     export function showMenu(options: string[], region: number) {
         rpg.ui._state().showMenu(options, region);
     }
 
+    //% blockId=rpg_ui_showEntityMenu
+    //% block="show entity menu for $entities in $region"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% region.shadow=rpg_screenRegion
+    //% subcategory=UI
+    //% group=Menu
+    //% weight=95
+    export function showEntityMenu(entities: Entity[], region: number) {
+        rpg.ui._state().showEntityMenu(entities, region);
+    }
+
     //% blockId=rpg_ui_pauseUntilMenuSelection
     //% block="pause until selection is made"
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Menu
     //% weight=90
     export function pauseUntilMenuSelection() {
         rpg.ui._state().pauseUntilMenuSelection();
     }
 
-    //% blockId=rpg_ui_getMenuSelection
-    //% block="last menu selection"
-    //% subcategory=Display
+    //% blockId=rpg_ui_getMenuSelectionString
+    //% block="last menu selected string"
+    //% subcategory=UI
     //% group=Menu
     //% weight=80
-    export function getMenuSelection(): string {
+    export function getMenuSelectionString(): string {
         return rpg.ui._state().getLastSelection();
+    }
+
+    //% blockId=rpg_ui_getMenuSelection
+    //% block="last menu selected entity"
+    //% subcategory=UI
+    //% group=Menu
+    //% weight=70
+    export function getMenuSelection(): Entity {
+        return rpg.ui._state().getLastSelectedEntity();
     }
 
     //% blockId=rpg_ui_wasMenuCancelled
     //% block="was menu cancelled"
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Menu
     //% weight=70
     export function wasMenuCancelled(): boolean {
@@ -82,7 +103,7 @@ namespace rpg {
 
     //% blockId=rpg_ui_closeMenu
     //% block="close menu"
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Menu
     //% weight=60
     export function closeMenu() {
@@ -91,11 +112,38 @@ namespace rpg {
 
     //% blockId=rpg_ui_closeAllMenus
     //% block="close all menus"
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Menu
     //% weight=50
     export function closeAllMenus() {
         rpg.ui._state().closeAllMenus();
+    }
+
+    //% blockId=rpg_ui_setMenuFrame
+    //% block="set menu frame $frame"
+    //% subcategory=UI
+    //% group=Menu
+    //% weight=40
+    export function setMenuFrame(frame: Image) {
+        rpg.ui._state().setFrame(frame);
+    }
+
+    //% blockId=rpg_ui_setMenuTextColor
+    //% block="set menu colors foreground $foregroundColor background $backgroundColor"
+    //% subcategory=UI
+    //% group=Menu
+    //% weight=30
+    export function setMenuTextColor(foregroundColor: number, backgroundColor: number) {
+        rpg.ui._state().setTextColor(foregroundColor, backgroundColor);
+    }
+
+    //% blockId=rpg_ui_setMenuSelectedTextColor
+    //% block="set menu selected colors foreground $foregroundColor background $backgroundColor"
+    //% subcategory=UI
+    //% group=Menu
+    //% weight=20
+    export function setMenuSelectedTextColor(foregroundColor: number, backgroundColor: number) {
+        rpg.ui._state().setSelectedTextColor(foregroundColor, backgroundColor);
     }
 
     //% blockId=rpg_ui_showDisplay
@@ -103,7 +151,7 @@ namespace rpg {
     //% source.shadow=variables_get
     //% source.defl=myEntity
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Display
     //% weight=100
     export function showDisplay(source: Entity, region: number, type: DisplayType) {
@@ -113,7 +161,7 @@ namespace rpg {
     //% blockId=rpg_ui_destroyDisplay
     //% block="destroy display in $region"
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group=Display
     //% weight=90
     export function destroyDisplay(region: number) {
@@ -124,55 +172,94 @@ namespace rpg {
     //% block="show $party party menu in $region"
     //% party.shadow=rpg_partyType
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group="Character Menus"
     //% weight=100
     export function showPartyMenu(party: number, region: number) {
-        rpg.ui._state().showMenu(getParty(party).map(n => n.name), region);
+        rpg.ui._state().showEntityMenu(getParty(party), region);
     }
 
     //% blockId=rpg_ui_showSkillMenu
     //% block="show skill menu for $character in $region"
-    //% character.shadow=variables_get
-    //% character.defl=myCharacter
+    //% character.shadow=rpg_character_character
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group="Character Menus"
     //% weight=90
     export function showSkillMenu(character: Entity, region: number) {
         _assertCharacter(character, "showSkillMenu");
 
-        rpg.ui._state().showMenu((character as Character).skills.getNames(), region);
+        rpg.ui._state().showEntityMenu((character as Character).skills.getAll(), region);
     }
 
     //% blockId=rpg_ui_showEquipMenu
     //% block="show equip menu for $character in $region"
-    //% character.shadow=variables_get
-    //% character.defl=myCharacter
+    //% character.shadow=rpg_character_character
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group="Character Menus"
     //% weight=80
     export function showEquipMenu(character: Entity, region: number) {
         _assertCharacter(character, "showEquipMenu");
 
-        rpg.ui._state().showMenu((character as Character).equipment.keys(), region);
+        rpg.ui._state().showEntityMenu((character as Character).equipment.getAll(), region);
     }
 
     //% blockId=rpg_ui_showInventoryMenu
-    //% block="show inventory menu for $character in $region||and collapse duplicate entries $dedupe"
-    //% character.shadow=variables_get
-    //% character.defl=myCharacter
+    //% block="show inventory menu for $character in $region"
+    //% character.shadow=rpg_character_character
     //% region.shadow=rpg_screenRegion
-    //% subcategory=Display
+    //% subcategory=UI
     //% group="Character Menus"
     //% weight=70
-    export function showInventoryMenu(character: Entity, region: number, dedupe = false) {
+    export function showInventoryMenu(character: Entity, region: number) {
         _assertCharacter(character, "showInventoryMenu");
 
-        const entries = dedupe ? (character as Character).inventory.getUniqueNames() :
-            (character as Character).inventory.getNames()
+        rpg.ui._state().showEntityMenu((character as Character).inventory.getAll(), region);
+    }
 
-        rpg.ui._state().showMenu(entries, region);
+    //% blockId=rpg_ui_printToTextLog
+    //% block="print to text log $text"
+    //% subcategory=UI
+    //% group="Text Log"
+    //% weight=100
+    export function printToTextLog(text: string) {
+        rpg.ui.log.print(text);
+    }
+
+    //% blockId=rpg_ui_setTextLogVisible
+    //% block="show text log $visible"
+    //% subcategory=UI
+    //% group="Text Log"
+    //% weight=90
+    export function setTextLogVisible(visible: boolean) {
+        rpg.ui.log.setVisible(visible);
+    }
+
+    //% blockId=rpg_ui_setTextLogFrame
+    //% block="set text log frame $frame"
+    //% subcategory=UI
+    //% group="Text Log"
+    //% weight=80
+    export function setTextLogFrame(frame: Image) {
+        rpg.ui.log.setFrame(frame);
+    }
+
+    //% blockId=rpg_ui_setTextLogTextColor
+    //% block="set text log text color $color"
+    //% subcategory=UI
+    //% group="Text Log"
+    //% weight=70
+    export function setTextLogTextColor(color: number) {
+        rpg.ui.log.setTextColor(color);
+    }
+
+    //% blockId=rpg_ui_setTextLogZIndex
+    //% block="set text log z index $z"
+    //% subcategory=UI
+    //% group="Text Log"
+    //% weight=60
+    export function setTextLogZIndex(z: number) {
+        rpg.ui.log.setZIndex(z);
     }
 }

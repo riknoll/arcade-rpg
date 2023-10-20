@@ -27,12 +27,28 @@ namespace rpg {
             return undefined;
         }
 
-        remove(index: number) {
+        remove(entity: Entity) {
+            this.entities = this.entities.filter(e => e !== entity);
+        }
+
+        removeByIndex(index: number) {
             this.entities.removeAt(index);
         }
 
-        removeByName(name: string) {
-            this.entities = this.entities.filter(c => c.name !== name);
+        removeByName(name: string, count?: number) {
+            const newEntities: Entity[] = [];
+
+            let removedCount = 0;
+
+            for (const entity of this.entities) {
+                if ((count == undefined || removedCount < count) && entity.name === name) {
+                    removedCount++;
+                    continue;
+                }
+                newEntities.push(entity);
+            }
+
+            this.entities = newEntities;
         }
 
         getAll() {
@@ -75,6 +91,19 @@ namespace rpg {
             }
 
             return out;
+        }
+
+        clone(deep: boolean) {
+            const result = new EntityRegistry();
+
+            if (deep) {
+                result.entities = this.entities.map(e => e.clone())
+            }
+            else {
+                result.entities = this.entities.slice();
+            }
+
+            return result;
         }
     }
 }

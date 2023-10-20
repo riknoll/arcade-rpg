@@ -11,6 +11,7 @@ namespace rpg.ui {
         menuStack: miniMenu.MenuSprite[];
 
         protected lastSelectedOption: string;
+        protected lastSelectedEntity: Entity;
         protected buttonPressed: boolean;
 
         constructor() {
@@ -24,7 +25,6 @@ namespace rpg.ui {
 
         setFrame(frame: Image) {
             this.frame = frame;
-            log.setFrame(frame);
 
             for (const sprite of this.displaySprites) {
                 sprite.updateBounds();
@@ -32,6 +32,24 @@ namespace rpg.ui {
 
             for (const sprite of this.menuStack) {
                 sprite.setFrame(frame);
+            }
+        }
+
+        setTextColor(foregroundColor: number, backgroundColor: number) {
+            for (const sprite of this.menuStack) {
+                sprite.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Foreground, foregroundColor)
+                sprite.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Background, backgroundColor)
+            }
+
+            for (const sprite of this.displaySprites) {
+                sprite.setTextColor(foregroundColor, backgroundColor);
+            }
+        }
+
+        setSelectedTextColor(foregroundColor: number, backgroundColor: number) {
+            for (const sprite of this.menuStack) {
+                sprite.setStyleProperty(miniMenu.StyleKind.Selected, miniMenu.StyleProperty.Foreground, foregroundColor)
+                sprite.setStyleProperty(miniMenu.StyleKind.Selected, miniMenu.StyleProperty.Background, backgroundColor)
             }
         }
 
@@ -89,6 +107,40 @@ namespace rpg.ui {
             menu.setButtonEventsEnabled(true);
         }
 
+        showEntityMenu(entities: Entity[], region: ScreenRegion) {
+            const menu = new miniMenu.MenuSprite();
+            this.setMenuStyle(menu);
+
+            const bounds = getScreenRegion(region);
+            menu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Width, bounds.width);
+            menu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Height, bounds.height);
+            menu.top = bounds.top;
+            menu.left = bounds.left;
+
+            this.lastSelectedOption = undefined;
+            this.buttonPressed = false;
+
+            menu.onButtonPressed(controller.A, (selection, index) => {
+                this.lastSelectedOption = selection;
+                this.lastSelectedEntity = entities[index];
+                this.buttonPressed = true;
+            })
+
+            menu.onButtonPressed(controller.B, (selection, index) => {
+                this.lastSelectedOption = undefined;
+                this.lastSelectedEntity = undefined;
+                this.buttonPressed = true;
+            })
+
+            menu.setMenuItems(entities.map(opt => new miniMenu.MenuItem(opt.name, undefined)));
+
+            if (this.menuStack.length) {
+                this.topMenu().setButtonEventsEnabled(false);
+            }
+            this.menuStack.push(menu);
+            menu.setButtonEventsEnabled(true);
+        }
+
         closeMenu() {
             const toDestroy = this.menuStack.pop();
             toDestroy.destroy();
@@ -115,8 +167,12 @@ namespace rpg.ui {
             return this.lastSelectedOption;
         }
 
+        getLastSelectedEntity() {
+            return this.lastSelectedEntity;
+        }
+
         wasMenuCancelled() {
-            return !this.lastSelectedOption;
+            return this.lastSelectedOption == undefined;
         }
 
         protected topMenu() {
