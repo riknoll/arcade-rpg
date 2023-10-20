@@ -200,7 +200,7 @@ namespace rpg {
     }
 
     //% blockId=rpg_character_addToInventory
-    //% block="$character add $entity to inventory"
+    //% block="$character add $item to inventory"
     //% character.shadow=rpg_character_character
     //% item.shadow=rpg_character_item
     //% subcategory=Characters
@@ -227,8 +227,21 @@ namespace rpg {
         return char.inventory.getByName(item);
     }
 
+    //% blockId=rpg_character_getInventory
+    //% block="$character get all items in inventory"
+    //% character.shadow=rpg_character_character
+    //% subcategory=Characters
+    //% group=Inventory
+    //% weight=85
+    export function getInventory(character: Entity): Entity[] {
+        _assertCharacter(character, "getInventory");
+
+        const char = character as Character;
+        return char.inventory.getAll();
+    }
+
     //% blockId=rpg_character_removeFromInventory
-    //% block="$character remove $entity from inventory"
+    //% block="$character remove $item from inventory"
     //% character.shadow=rpg_character_character
     //% item.shadow=rpg_character_item
     //% subcategory=Characters
@@ -242,7 +255,7 @@ namespace rpg {
     }
 
     //% blockId=rpg_character_removeFromInventoryByName
-    //% block="$character remove item with $name from inventory||count $count"
+    //% block="$character remove item with name $item from inventory||count $count"
     //% character.shadow=rpg_character_character
     //% item.shadow=rpg_itemNameShadow
     //% count.defl=1

@@ -84,6 +84,56 @@ namespace rpg {
         return rpg.data.getBoolean(entity, key);
     }
 
+    //% blockId=rpg_data_dataSetImage
+    //% block="set $entity data $key to image $value"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% value.shadow=screen_image_picker
+    //% key.shadow=rpg_dataImageKeyShadow
+    //% subcategory=Data
+    //% group=Image
+    //% weight=100
+    export function dataSetImage(entity: Entity, key: string, value: Image) {
+        rpg.data.setImage(entity, key, value);
+    }
+
+    //% blockId=rpg_data_dataGetImage
+    //% block="$entity data $key as image"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% key.shadow=rpg_dataImageKeyShadow
+    //% subcategory=Data
+    //% group=Image
+    //% weight=90
+    export function dataGetImage(entity: Entity, key: string): Image {
+        return rpg.data.getImage(entity, key);
+    }
+
+    //% blockId=rpg_data_dataSetLocation
+    //% block="set $entity data $key to location $value"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% key.shadow=rpg_dataLocationKeyShadow
+    //% value.shadow=mapgettile
+    //% subcategory=Data
+    //% group=Location
+    //% weight=100
+    export function dataSetLocation(entity: Entity, key: string, value: tiles.Location) {
+        rpg.data.setLocation(entity, key, value);
+    }
+
+    //% blockId=rpg_data_dataGetLocation
+    //% block="$entity data $key as location"
+    //% entity.shadow=variables_get
+    //% entity.defl=myEntity
+    //% key.shadow=rpg_dataLocationKeyShadow
+    //% subcategory=Data
+    //% group=Location
+    //% weight=90
+    export function dataGetLocation(entity: Entity, key: string): tiles.Location {
+        return rpg.data.getLocation(entity, key);
+    }
+
     //% blockId=rpg_data_dataSetSprite
     //% block="set $entity data $key to sprite $value"
     //% entity.shadow=variables_get
@@ -106,30 +156,6 @@ namespace rpg {
     //% weight=90
     export function dataGetSprite(entity: Entity, key: string): Sprite {
         return rpg.data.getSprite(entity, key);
-    }
-
-    //% blockId=rpg_data_dataSetImage
-    //% block="set $entity data $key to image $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
-    //% key.shadow=rpg_dataImageKeyShadow
-    //% subcategory=Data
-    //% group=Image
-    //% weight=100
-    export function dataSetImage(entity: Entity, key: string, value: Image) {
-        rpg.data.setImage(entity, key, value);
-    }
-
-    //% blockId=rpg_data_dataGetImage
-    //% block="$entity data $key as image"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
-    //% key.shadow=rpg_dataImageKeyShadow
-    //% subcategory=Data
-    //% group=Image
-    //% weight=90
-    export function dataGetImage(entity: Entity, key: string): Image {
-        return rpg.data.getImage(entity, key);
     }
 
     //% blockId=rpg_data_dataSetEntity
@@ -178,29 +204,5 @@ namespace rpg {
     //% weight=90
     export function dataGetTilemap(entity: Entity, key: string): tiles.TileMapData {
         return rpg.data.getTilemap(entity, key);
-    }
-
-    //% blockId=rpg_data_dataSetLocation
-    //% block="set $entity data $key to location $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
-    //% key.shadow=rpg_dataLocationKeyShadow
-    //% subcategory=Data
-    //% group=Location
-    //% weight=100
-    export function dataSetLocation(entity: Entity, key: string, value: tiles.Location) {
-        rpg.data.setLocation(entity, key, value);
-    }
-
-    //% blockId=rpg_data_dataGetLocation
-    //% block="$entity data $key as location"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
-    //% key.shadow=rpg_dataLocationKeyShadow
-    //% subcategory=Data
-    //% group=Location
-    //% weight=90
-    export function dataGetLocation(entity: Entity, key: string): tiles.Location {
-        return rpg.data.getLocation(entity, key);
     }
 }

@@ -121,9 +121,11 @@ namespace rpg {
 
     //% blockId=rpg_ui_setMenuFrame
     //% block="set menu frame $frame"
+    //% frame.shadow=dialog_image_picker
     //% subcategory=UI
-    //% group=Menu
-    //% weight=40
+    //% group=Style
+    //% weight=100
+    //% blockGap=8
     export function setMenuFrame(frame: Image) {
         rpg.ui._state().setFrame(frame);
     }
@@ -131,8 +133,9 @@ namespace rpg {
     //% blockId=rpg_ui_setMenuTextColor
     //% block="set menu colors foreground $foregroundColor background $backgroundColor"
     //% subcategory=UI
-    //% group=Menu
-    //% weight=30
+    //% group=Style
+    //% weight=90
+    //% blockGap=8
     export function setMenuTextColor(foregroundColor: number, backgroundColor: number) {
         rpg.ui._state().setTextColor(foregroundColor, backgroundColor);
     }
@@ -140,8 +143,8 @@ namespace rpg {
     //% blockId=rpg_ui_setMenuSelectedTextColor
     //% block="set menu selected colors foreground $foregroundColor background $backgroundColor"
     //% subcategory=UI
-    //% group=Menu
-    //% weight=20
+    //% group=Style
+    //% weight=80
     export function setMenuSelectedTextColor(foregroundColor: number, backgroundColor: number) {
         rpg.ui._state().setSelectedTextColor(foregroundColor, backgroundColor);
     }
@@ -238,9 +241,11 @@ namespace rpg {
 
     //% blockId=rpg_ui_setTextLogFrame
     //% block="set text log frame $frame"
+    //% frame.shadow=dialog_image_picker
     //% subcategory=UI
-    //% group="Text Log"
-    //% weight=80
+    //% group=Style
+    //% weight=50
+    //% blockGap=8
     export function setTextLogFrame(frame: Image) {
         rpg.ui.log.setFrame(frame);
     }
@@ -248,8 +253,9 @@ namespace rpg {
     //% blockId=rpg_ui_setTextLogTextColor
     //% block="set text log text color $color"
     //% subcategory=UI
-    //% group="Text Log"
-    //% weight=70
+    //% group=Style
+    //% weight=40
+    //% blockGap=8
     export function setTextLogTextColor(color: number) {
         rpg.ui.log.setTextColor(color);
     }
@@ -257,8 +263,8 @@ namespace rpg {
     //% blockId=rpg_ui_setTextLogZIndex
     //% block="set text log z index $z"
     //% subcategory=UI
-    //% group="Text Log"
-    //% weight=60
+    //% group=Style
+    //% weight=30
     export function setTextLogZIndex(z: number) {
         rpg.ui.log.setZIndex(z);
     }

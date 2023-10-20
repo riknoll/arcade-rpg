@@ -136,11 +136,12 @@ namespace rpg {
 
     //% blockId=rpg_equation_equipmentExpression
     //% block="$owner equipment $equipSlot"
+    //% owner.shadow=rpg_equation_participantExpression
     //% equipSlot.shadow=rpg_equipmentSlotNameShadow
     //% subcategory=Equation
     //% group=Entity
     //% weight=60
-    export function equipmentExpression(owner: ParticipantType, equipSlot: string): rpg.equation.EntityExpressionNode {
+    export function equipmentExpression(owner: rpg.equation.EntityExpressionNode, equipSlot: string): rpg.equation.EntityExpressionNode {
         return new rpg.equation.EquipmentExpression(owner, equipSlot);
     }
 

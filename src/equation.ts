@@ -117,7 +117,7 @@ namespace rpg.equation {
     }
 
     export class EquipmentExpression extends EntityExpressionNode {
-        constructor(public owner: ParticipantType, public equipSlot: string) {
+        constructor(public owner: EntityExpressionNode, public equipSlot: string) {
             super(EntityExpressionNodeKind.Equipment);
         }
     }
@@ -249,7 +249,7 @@ namespace rpg.equation {
             case EntityExpressionNodeKind.Participant:
                 return getStatOwner((expr as ParticipantExpression).owner, defender, damageSource, attacker);
             case EntityExpressionNodeKind.Equipment:
-                const owner = getStatOwner((expr as EquipmentExpression).owner, defender, damageSource, attacker);
+                const owner = evaluateEntityExpression((expr as EquipmentExpression).owner, defender, damageSource, attacker);
                 if (owner) {
                     _assertCharacter(owner, "evaluateEntityExpression");
                     return (owner as Character).equipment.getEquip((expr as EquipmentExpression).equipSlot);
