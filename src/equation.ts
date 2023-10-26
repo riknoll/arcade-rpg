@@ -164,6 +164,10 @@ namespace rpg.equation {
                         return left * right;
                     case BinaryOperator.Exponent:
                         return left ** right;
+                    case BinaryOperator.Min:
+                        return Math.min(left, right);
+                    case BinaryOperator.Max:
+                        return Math.max(left, right);
                 }
             case ExpressionNodeKind.UnaryExpression:
                 const val = evaluateDamageExpression((expr as UnaryExpression).expr, defender, damageSource, attacker)

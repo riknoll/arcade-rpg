@@ -6,6 +6,7 @@ namespace rpg.ui {
         backgroundColor: number;
         selectedForegroundColor: number;
         selectedBackgroundColor: number;
+        menuMargin: number;
 
         displaySprites: DisplaySprite[];
         menuStack: miniMenu.MenuSprite[];
@@ -19,6 +20,7 @@ namespace rpg.ui {
             this.backgroundColor = 1;
             this.selectedBackgroundColor = 3;
             this.selectedForegroundColor = 1;
+            this.menuMargin = 0;
             this.displaySprites = [];
             this.menuStack = [];
         }
@@ -182,6 +184,10 @@ namespace rpg.ui {
         protected setMenuStyle(menu: miniMenu.MenuSprite) {
             menu.setFlag(SpriteFlag.RelativeToCamera, true);
             menu.setFrame(this.frame);
+            if (this.frame) {
+                const unit = Math.idiv(this.frame.width, 3);
+                menu.setMenuStyleProperty(miniMenu.MenuStyleProperty.BackgroundColor, this.frame.getPixel(unit, unit))
+            }
             menu.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Foreground, this.foregroundColor);
             menu.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Background, this.backgroundColor);
             menu.setStyleProperty(miniMenu.StyleKind.Selected, miniMenu.StyleProperty.Foreground, this.selectedForegroundColor);

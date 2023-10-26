@@ -13,27 +13,49 @@ namespace rpg.ui {
     }
 
     export function getScreenRegion(region: ScreenRegion) {
+        let result: Region;
         switch (region) {
             case ScreenRegion.Full:
-                return new Region(0, 0, screen.width, screen.height);
+                result = new Region(0, 0, screen.width, screen.height);
+                break;
             case ScreenRegion.Center:
-                return new Region(10, 5, screen.width - 10, screen.height - 5);
+                result = new Region(10, 5, screen.width - 10, screen.height - 5);
+                break;
             case ScreenRegion.Left:
-                return new Region(0, 0, screen.width >> 1, screen.height);
+                result = new Region(0, 0, screen.width >> 1, screen.height);
+                break;
             case ScreenRegion.Right:
-                return new Region(screen.width >> 1, 0, screen.width, screen.height);
+                result = new Region(screen.width >> 1, 0, screen.width, screen.height);
+                break;
             case ScreenRegion.Top:
-                return new Region(0, 0, screen.width, screen.height >> 1);
+                result = new Region(0, 0, screen.width, screen.height >> 1);
+                break;
             case ScreenRegion.Bottom:
-                return new Region(0, screen.height >> 1, screen.width, screen.height);
+                result = new Region(0, screen.height >> 1, screen.width, screen.height);
+                break;
             case ScreenRegion.TopLeft:
-                return new Region(0, 0, screen.width >> 1, screen.height >> 1);
+                result = new Region(0, 0, screen.width >> 1, screen.height >> 1);
+                break;
             case ScreenRegion.TopRight:
-                return new Region(screen.width >> 1, 0, screen.width, screen.height >> 1);
+                result = new Region(screen.width >> 1, 0, screen.width, screen.height >> 1);
+                break;
             case ScreenRegion.BottomLeft:
-                return new Region(0, screen.height >> 1, screen.width >> 1, screen.height);
+                result = new Region(0, screen.height >> 1, screen.width >> 1, screen.height);
+                break;
             case ScreenRegion.BottomRight:
-                return new Region(screen.width >> 1, screen.height >> 1, screen.width, screen.height);
+                result = new Region(screen.width >> 1, screen.height >> 1, screen.width, screen.height);
+                break;
         }
+
+        const padding = _state().menuMargin;
+
+        if (padding) {
+            result.left += padding;
+            result.right -= padding;
+            result.top += padding;
+            result.bottom -= padding;
+        }
+
+        return result;
     }
 }

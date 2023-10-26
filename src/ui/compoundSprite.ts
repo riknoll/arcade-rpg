@@ -58,13 +58,13 @@ namespace rpg {
             this.root.left = this.left + (this.root.left - left);
             this.root.top = this.top + (this.root.top - top);
 
-            console.log(`ROOT ${this.root.left} ${this.root.top}`)
+            // console.log(`ROOT ${this.root.left} ${this.root.top}`)
 
             for (const child of this.children) {
                 child.left = this.root.left + child.data["$compound_dx"];
                 child.top = this.root.top + child.data["$compound_dy"];
 
-                console.log(`CHILD ${child.left} ${child.top}`)
+                // console.log(`CHILD ${child.left} ${child.top}`)
             }
         }
 

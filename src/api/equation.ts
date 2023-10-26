@@ -9,7 +9,11 @@ namespace rpg {
         //% block="/"
         Divide,
         //% block="**"
-        Exponent
+        Exponent,
+        //% block="min"
+        Min,
+        //% block="max"
+        Max
     }
 
     export enum ComparisonOperator {
@@ -47,7 +51,9 @@ namespace rpg {
         //% block="level"
         Level,
         //% block="health"
-        Health
+        Health,
+        //% block="stats per level"
+        StatsPerLevel,
     }
 
     export enum UnaryOperator {

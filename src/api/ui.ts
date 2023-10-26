@@ -49,8 +49,10 @@ namespace rpg {
     //% subcategory=UI
     //% group=Menu
     //% weight=100
+    //% blockGap=8
     export function showMenu(options: string[], region: number) {
         rpg.ui._state().showMenu(options, region);
+        rpg.ui._state().pauseUntilMenuSelection();
     }
 
     //% blockId=rpg_ui_showEntityMenu
@@ -63,41 +65,35 @@ namespace rpg {
     //% weight=95
     export function showEntityMenu(entities: Entity[], region: number) {
         rpg.ui._state().showEntityMenu(entities, region);
-    }
-
-    //% blockId=rpg_ui_pauseUntilMenuSelection
-    //% block="pause until selection is made"
-    //% subcategory=UI
-    //% group=Menu
-    //% weight=90
-    export function pauseUntilMenuSelection() {
         rpg.ui._state().pauseUntilMenuSelection();
     }
 
     //% blockId=rpg_ui_getMenuSelectionString
-    //% block="last menu selected string"
+    //% block="selected string"
     //% subcategory=UI
     //% group=Menu
     //% weight=80
+    //% blockGap=8
     export function getMenuSelectionString(): string {
         return rpg.ui._state().getLastSelection();
     }
 
     //% blockId=rpg_ui_getMenuSelection
-    //% block="last menu selected entity"
+    //% block="selected entity"
     //% subcategory=UI
     //% group=Menu
     //% weight=70
+    //% blockGap=8
     export function getMenuSelection(): Entity {
         return rpg.ui._state().getLastSelectedEntity();
     }
 
     //% blockId=rpg_ui_wasMenuCancelled
-    //% block="was menu cancelled"
+    //% block="nothing was selected"
     //% subcategory=UI
     //% group=Menu
-    //% weight=70
-    export function wasMenuCancelled(): boolean {
+    //% weight=40
+    export function nothingWasSelected(): boolean {
         return rpg.ui._state().wasMenuCancelled();
     }
 
@@ -105,7 +101,8 @@ namespace rpg {
     //% block="close menu"
     //% subcategory=UI
     //% group=Menu
-    //% weight=60
+    //% weight=50
+    //% blockGap=8
     export function closeMenu() {
         rpg.ui._state().closeMenu();
     }
@@ -114,7 +111,7 @@ namespace rpg {
     //% block="close all menus"
     //% subcategory=UI
     //% group=Menu
-    //% weight=50
+    //% weight=40
     export function closeAllMenus() {
         rpg.ui._state().closeAllMenus();
     }
@@ -150,6 +147,7 @@ namespace rpg {
     //% weight=100
     export function showPartyMenu(party: number, region: number) {
         rpg.ui._state().showEntityMenu(getParty(party), region);
+        rpg.ui._state().pauseUntilMenuSelection();
     }
 
     //% blockId=rpg_ui_showSkillMenu
@@ -163,6 +161,7 @@ namespace rpg {
         _assertCharacter(character, "showSkillMenu");
 
         rpg.ui._state().showEntityMenu((character as Character).skills.getAll(), region);
+        rpg.ui._state().pauseUntilMenuSelection();
     }
 
     //% blockId=rpg_ui_showEquipMenu
@@ -176,6 +175,7 @@ namespace rpg {
         _assertCharacter(character, "showEquipMenu");
 
         rpg.ui._state().showEntityMenu((character as Character).equipment.getAll(), region);
+        rpg.ui._state().pauseUntilMenuSelection();
     }
 
     //% blockId=rpg_ui_showInventoryMenu
@@ -189,6 +189,7 @@ namespace rpg {
         _assertCharacter(character, "showInventoryMenu");
 
         rpg.ui._state().showEntityMenu((character as Character).inventory.getAll(), region);
+        rpg.ui._state().pauseUntilMenuSelection();
     }
 
     //% blockId=rpg_ui_printToTextLog
@@ -241,6 +242,15 @@ namespace rpg {
     //% weight=80
     export function setMenuSelectedTextColor(foregroundColor: number, backgroundColor: number) {
         rpg.ui._state().setSelectedTextColor(foregroundColor, backgroundColor);
+    }
+
+    //% blockId=rpg_ui_setMenuMargin
+    //% block="set menu margin to $margin"
+    //% subcategory=UI
+    //% group=Style
+    //% weight=70
+    export function setMenuMargin(margin: number) {
+        rpg.ui._state().menuMargin = margin;
     }
 
     //% blockId=rpg_ui_setTextLogFrame

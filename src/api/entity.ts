@@ -105,6 +105,9 @@ namespace rpg {
             case EntityValue.Level:
                 entity.level = val;
                 break;
+            case EntityValue.StatsPerLevel:
+                entity.statsPerLevel = val;
+                break;
         }
     }
 
@@ -132,18 +135,26 @@ namespace rpg {
                 return entity.health;
             case EntityValue.Level:
                 return entity.level;
+            case EntityValue.StatsPerLevel:
+                return entity.statsPerLevel;
         }
     }
 
     //% blockId=rpg_entity_levelUp
-    //% block="$entity level up"
+    //% block="$entity level up||by $levels levels"
     //% entity.shadow=variables_get
     //% entity.defl=myEntity
+    //% levels.defl=1
     //% subcategory=Entity
     //% group=Stats
     //% weight=40
-    export function levelUp(entity: Entity) {
-        entity.levelUp();
+    export function levelUp(entity: Entity, levels = 1) {
+        if (!(levels >= 0)) {
+            levels = 0;
+        }
+        for (let i = 0; i < levels; i++) {
+            entity.levelUp();
+        }
     }
 
     //% blockId=rpg_entity_setName
@@ -207,6 +218,21 @@ namespace rpg {
     export function dealDamageWith(attacker: Entity, damageSource: Entity, defender: Entity) {
         const damage = rpg.equation.evaluateDamageExpression(damageSource.damage, defender, damageSource, attacker);
         defender.health = Math.max(defender.health - damage, 0);
+    }
+
+    //% blockId=rpg_entity_calculateDamage
+    //% block="calculate damage with attacker $attacker defender $defender||damage source $damageSource"
+    //% attacker.shadow=variables_get
+    //% attacker.defl=attacker
+    //% defender.shadow=variables_get
+    //% defender.defl=defender
+    //% damageSource.shadow=variables_get
+    //% damageSource.defl=myEntity
+    //% subcategory=Entity
+    //% group=Damage
+    //% weight=70
+    export function calculateDamage(attacker: Entity, defender: Entity, damageSource?: Entity): number {
+        return rpg.equation.evaluateDamageExpression(damageSource.damage, defender, damageSource, attacker);
     }
 
     //% blockId=rpg_entity_attachToSprite

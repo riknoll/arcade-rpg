@@ -16,16 +16,21 @@ namespace rpg.ui.log {
         }
 
         printText(text: string) {
+            this.setVisible(true);
+
             this.sprite.setText(text);
             this.sprite.cancelAnimation();
             this.sprite.setStartLine(0);
 
-            do {
+            let lastPage = false;
+
+            while (!lastPage) {
+                lastPage = !this.sprite.hasNextPage();
                 this.sprite.animateAtSpeed(30);
                 this.sprite.pauseUntilAnimationIsComplete();
-                controller.A.pauseUntil(ControllerButtonEvent.Pressed);
+                controller.A.pauseUntil(ControllerButtonEvent.Released);
                 this.sprite.nextPage();
-            } while (this.sprite.hasNextPage())
+            }
         }
 
         setFrame(frame: Image) {
