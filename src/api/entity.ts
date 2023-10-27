@@ -330,6 +330,28 @@ namespace rpg {
         return result;
     }
 
+    //% blockId=rpg_entity_sortByData
+    //% block="sort $entities by data $key||in ascending order $ascending"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% key.shadow=rpg_dataNumberKeyShadow
+    //% ascending.defl=true
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=80
+    //% blockGap=8
+    export function sortByData(entities: Entity[], key: string, ascending = true) {
+        const result = entities.slice();
+
+        result.sort((a, b) => dataGetNumber(a, key) - dataGetNumber(b, key));
+
+        if (!ascending) {
+            result.reverse();
+        }
+
+        return result;
+    }
+
     //% blockId=rpg_entity_sortByName
     //% block="sort $entities by name||in ascending order $ascending"
     //% entities.shadow=variables_get
@@ -337,7 +359,7 @@ namespace rpg {
     //% ascending.defl=true
     //% subcategory=Entity
     //% group=Arrays
-    //% weight=80
+    //% weight=70
     export function sortByName(entities: Entity[], ascending = true) {
         const result = entities.slice();
         result.sort();
@@ -358,7 +380,7 @@ namespace rpg {
     //% ascending.defl=true
     //% subcategory=Entity
     //% group=Arrays
-    //% weight=70
+    //% weight=60
     export function concat(a: Entity[], b: Entity[]): Entity[] {
         return a.concat(b);
     }

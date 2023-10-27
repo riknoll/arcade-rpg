@@ -315,7 +315,6 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=100
-    //% blockGap=8
     export function addToParty(character: Entity, party: number): void {
         _assertCharacter(character, "addToParty");
 
@@ -328,18 +327,57 @@ namespace rpg {
     }
 
     //% blockId=rpg_character_removeFromParty
-    //% block="remove $party character with name $name"
+    //% block="remove $character from $party"
+    //% party.shadow=rpg_partyType
+    //% character.shadow=rpg_character_character
+    //% subcategory=Characters
+    //% group=Party
+    //% weight=90
+    //% blockGap=8
+    export function removeFromParty(party: number, character: Entity): void {
+        if (party === PartyType.Player) {
+            _globalState().playerParty.remove(character);
+        }
+        else {
+            _globalState().enemyParty.remove(character);
+        }
+    }
+
+    //% blockId=rpg_character_removeFromPartyByName
+    //% block="remove character with name $name from $party"
     //% party.shadow=rpg_partyType
     //% name.shadow=rpg_characterNameShadow
     //% subcategory=Characters
     //% group=Party
-    //% weight=90
-    export function removeFromParty(party: number, name: string): void {
+    //% weight=89
+    //% blockGap=8
+    export function removeFromPartyByName(party: number, name: string): void {
         if (party === PartyType.Player) {
             _globalState().playerParty.removeByName(name);
         }
         else {
             _globalState().enemyParty.removeByName(name);
+        }
+    }
+
+    //% blockId=rpg_character_clearParty
+    //% block="remove all characters from $party"
+    //% party.shadow=rpg_partyType
+    //% subcategory=Characters
+    //% group=Party
+    //% weight=88
+    export function clearParty(party: number): void {
+        let toClear: EntityRegistry;
+
+        if (party === PartyType.Player) {
+            toClear = _globalState().playerParty;
+        }
+        else {
+            toClear = _globalState().enemyParty;
+        }
+
+        for (const e of toClear.getAll()) {
+            toClear.remove(e);
         }
     }
 
@@ -366,12 +404,29 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=70
+    //% blockGap=8
     export function getPartyCharacter(party: number, name: string): Entity {
         if (party === PartyType.Player) {
             return _globalState().playerParty.getByName(name);
         }
         else {
             return _globalState().enemyParty.getByName(name);
+        }
+    }
+
+    //% blockId=rpg_character_isInParty
+    //% block="$character is in $party"
+    //% party.shadow=rpg_partyType
+    //% character.shadow=rpg_character_character
+    //% subcategory=Characters
+    //% group=Party
+    //% weight=60
+    export function isInParty(party: number, character: Entity): boolean {
+        if (party === PartyType.Player) {
+            return _globalState().playerParty.getAll().indexOf(character) !== -1;
+        }
+        else {
+            return _globalState().enemyParty.getAll().indexOf(character) !== -1;
         }
     }
 
