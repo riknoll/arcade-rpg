@@ -7,6 +7,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Number
     //% weight=100
+    //% blockGap=8
     export function dataSetNumber(entity: Entity, key: string, value: number) {
         rpg.data.setNumber(entity, key, value);
     }
@@ -19,6 +20,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Number
     //% weight=95
+    //% blockGap=8
     export function dataChangeNumber(entity: Entity, key: string, value: number) {
         rpg.data.changeNumber(entity, key, value);
     }
@@ -32,6 +34,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Number
     //% weight=90
+    //% blockGap=8
     export function dataGetNumber(entity: Entity, key: string): number {
         return rpg.data.getNumber(entity, key);
     }
@@ -44,6 +47,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=String
     //% weight=100
+    //% blockGap=8
     export function dataSetString(entity: Entity, key: string, value: string) {
         rpg.data.setString(entity, key, value);
     }
@@ -56,6 +60,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=String
     //% weight=90
+    //% blockGap=8
     export function dataGetString(entity: Entity, key: string): string {
         return rpg.data.getString(entity, key);
     }
@@ -68,6 +73,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Boolean
     //% weight=100
+    //% blockGap=8
     export function dataSetBoolean(entity: Entity, key: string, value: boolean) {
         rpg.data.setBoolean(entity, key, value);
     }
@@ -80,6 +86,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Boolean
     //% weight=90
+    //% blockGap=8
     export function dataGetBoolean(entity: Entity, key: string): boolean {
         return rpg.data.getBoolean(entity, key);
     }
@@ -93,6 +100,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Image
     //% weight=100
+    //% blockGap=8
     export function dataSetImage(entity: Entity, key: string, value: Image) {
         rpg.data.setImage(entity, key, value);
     }
@@ -105,6 +113,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Image
     //% weight=90
+    //% blockGap=8
     export function dataGetImage(entity: Entity, key: string): Image {
         return rpg.data.getImage(entity, key);
     }
@@ -118,6 +127,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Location
     //% weight=100
+    //% blockGap=8
     export function dataSetLocation(entity: Entity, key: string, value: tiles.Location) {
         rpg.data.setLocation(entity, key, value);
     }
@@ -130,6 +140,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Location
     //% weight=90
+    //% blockGap=8
     export function dataGetLocation(entity: Entity, key: string): tiles.Location {
         return rpg.data.getLocation(entity, key);
     }
@@ -142,6 +153,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Sprite
     //% weight=100
+    //% blockGap=8
     export function dataSetSprite(entity: Entity, key: string, value: Sprite) {
         rpg.data.setSprite(entity, key, value);
     }
@@ -154,6 +166,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Sprite
     //% weight=90
+    //% blockGap=8
     export function dataGetSprite(entity: Entity, key: string): Sprite {
         return rpg.data.getSprite(entity, key);
     }
@@ -166,6 +179,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Entity
     //% weight=100
+    //% blockGap=8
     export function dataSetEntity(entity: Entity, key: string, value: Entity) {
         rpg.data.setEntity(entity, key, value);
     }
@@ -178,6 +192,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Entity
     //% weight=90
+    //% blockGap=8
     export function dataGetEntity(entity: Entity, key: string): Entity {
         return rpg.data.getEntity(entity, key);
     }
@@ -190,6 +205,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Tilemap
     //% weight=100
+    //% blockGap=8
     export function dataSetTilemap(entity: Entity, key: string, value: tiles.TileMapData) {
         rpg.data.setTilemap(entity, key, value);
     }
@@ -202,6 +218,7 @@ namespace rpg {
     //% subcategory=Data
     //% group=Tilemap
     //% weight=90
+    //% blockGap=8
     export function dataGetTilemap(entity: Entity, key: string): tiles.TileMapData {
         return rpg.data.getTilemap(entity, key);
     }

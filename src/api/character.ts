@@ -51,11 +51,26 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Equipment
     //% weight=80
+    //% blockGap=8
     export function setEquipment(character: Entity, slot: string, value: Entity): void {
         _assertCharacter(character, "setEquipment");
 
         const char = character as Character;
         char.equipment.setEquip(slot, value);
+    }
+
+    //% blockId=rpg_character_removeEquipment
+    //% block="$character remove equipment in slot $slot"
+    //% character.shadow=rpg_character_character
+    //% slot.shadow=rpg_equipmentSlotNameShadow
+    //% subcategory=Characters
+    //% group=Equipment
+    //% weight=75
+    export function removeEquipment(character: Entity, slot: string): void {
+        _assertCharacter(character, "removeEquipment");
+
+        const char = character as Character;
+        char.equipment.removeEquip(slot);
     }
 
     //% blockId=rpg_character_getEquipment
@@ -65,6 +80,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Equipment
     //% weight=70
+    //% blockGap=8
     export function getEquipment(character: Entity, slot: string): Entity {
         _assertCharacter(character, "getEquipment");
 
@@ -84,20 +100,6 @@ namespace rpg {
 
         const char = character as Character;
         return char.equipment.hasEquip(slot);
-    }
-
-    //% blockId=rpg_character_removeEquipment
-    //% block="$character remove equipment in slot $slot"
-    //% character.shadow=rpg_character_character
-    //% slot.shadow=rpg_equipmentSlotNameShadow
-    //% subcategory=Characters
-    //% group=Equipment
-    //% weight=50
-    export function removeEquipment(character: Entity, slot: string): void {
-        _assertCharacter(character, "removeEquipment");
-
-        const char = character as Character;
-        char.equipment.removeEquip(slot);
     }
 
     //% blockId=rpg_character_skill
@@ -122,6 +124,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Skills
     //% weight=80
+    //% blockGap=8
     export function addSkill(character: Entity, skill: Entity): void {
         _assertCharacter(character, "addSkill");
 
@@ -143,32 +146,34 @@ namespace rpg {
         char.skills.removeByName(skill);
     }
 
-    //% blockId=rpg_character_hasSkill
-    //% block="$character has skill $skill"
-    //% character.shadow=rpg_character_character
-    //% skill.shadow=rpg_skillNameShadow
-    //% subcategory=Characters
-    //% group=Skills
-    //% weight=60
-    export function hasSkill(character: Entity, skill: string): boolean {
-        _assertCharacter(character, "hasSkill");
-
-        const char = character as Character;
-        return char.skills.exists(skill);
-    }
-
     //% blockId=rpg_character_getSkill
     //% block="$character get skill $skill"
     //% character.shadow=rpg_character_character
     //% skill.shadow=rpg_skillNameShadow
     //% subcategory=Characters
     //% group=Skills
-    //% weight=50
+    //% weight=60
+    //% blockGap=8
     export function getSkill(character: Entity, skill: string): Entity {
         _assertCharacter(character, "getSkill");
 
         const char = character as Character;
         return char.skills.getByName(skill);
+    }
+
+    //% blockId=rpg_character_hasSkill
+    //% block="$character has skill $skill"
+    //% character.shadow=rpg_character_character
+    //% skill.shadow=rpg_skillNameShadow
+    //% subcategory=Characters
+    //% group=Skills
+    //% weight=50
+    //% blockGap=8
+    export function hasSkill(character: Entity, skill: string): boolean {
+        _assertCharacter(character, "hasSkill");
+
+        const char = character as Character;
+        return char.skills.exists(skill);
     }
 
     //% blockId=rpg_character_getSkills
@@ -206,38 +211,12 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Inventory
     //% weight=100
+    //% blockGap=8
     export function addToInventory(character: Entity, item: Entity): void {
         _assertCharacter(character, "addToInventory");
 
         const char = character as Character;
         char.inventory.add(item);
-    }
-
-    //% blockId=rpg_character_getFromInventory
-    //% block="$character get item with name $item from inventory"
-    //% character.shadow=rpg_character_character
-    //% item.shadow=rpg_itemNameShadow
-    //% subcategory=Characters
-    //% group=Inventory
-    //% weight=90
-    export function getFromInventory(character: Entity, item: string): Entity {
-        _assertCharacter(character, "getFromInventory");
-
-        const char = character as Character;
-        return char.inventory.getByName(item);
-    }
-
-    //% blockId=rpg_character_getInventory
-    //% block="$character get all items in inventory"
-    //% character.shadow=rpg_character_character
-    //% subcategory=Characters
-    //% group=Inventory
-    //% weight=85
-    export function getInventory(character: Entity): Entity[] {
-        _assertCharacter(character, "getInventory");
-
-        const char = character as Character;
-        return char.inventory.getAll();
     }
 
     //% blockId=rpg_character_removeFromInventory
@@ -246,7 +225,8 @@ namespace rpg {
     //% item.shadow=rpg_character_item
     //% subcategory=Characters
     //% group=Inventory
-    //% weight=80
+    //% weight=90
+    //% blockGap=8
     export function removeFromInventory(character: Entity, item: Entity): void {
         _assertCharacter(character, "removeFromInventory");
 
@@ -261,7 +241,7 @@ namespace rpg {
     //% count.defl=1
     //% subcategory=Characters
     //% group=Inventory
-    //% weight=70
+    //% weight=80
     export function removeFromInventoryByName(character: Entity, item: string, count = 1): void {
         _assertCharacter(character, "removeFromInventoryByName");
 
@@ -269,18 +249,48 @@ namespace rpg {
         char.inventory.removeByName(item, count);
     }
 
-    //% blockId=rpg_character_hasInInventory
+    //% blockId=rpg_character_getFromInventory
     //% block="$character get item with name $item from inventory"
     //% character.shadow=rpg_character_character
     //% item.shadow=rpg_itemNameShadow
     //% subcategory=Characters
     //% group=Inventory
+    //% weight=70
+    //% blockGap=8
+    export function getFromInventory(character: Entity, item: string): Entity {
+        _assertCharacter(character, "getFromInventory");
+
+        const char = character as Character;
+        return char.inventory.getByName(item);
+    }
+
+    //% blockId=rpg_character_hasInInventory
+    //% block="$character has item with name $item in inventory"
+    //% character.shadow=rpg_character_character
+    //% item.shadow=rpg_itemNameShadow
+    //% subcategory=Characters
+    //% group=Inventory
     //% weight=60
+    //% blockGap=8
     export function hasInInventory(character: Entity, item: string): boolean {
         _assertCharacter(character, "hasInInventory");
 
         const char = character as Character;
         return char.inventory.exists(item);
+    }
+
+    //% blockId=rpg_character_getInventory
+    //% block="$character get all items in inventory"
+    //% character.shadow=rpg_character_character
+    //% subcategory=Characters
+    //% group=Inventory
+    //% weight=50
+    //% blockGap=8
+    export function getInventory(character: Entity): Entity[] {
+        _assertCharacter(character, "getInventory");
+
+        const char = character as Character;
+        return char.inventory.getAll();
     }
 
     //% blockId=rpg_character_countInInventory
@@ -289,7 +299,8 @@ namespace rpg {
     //% item.shadow=rpg_itemNameShadow
     //% subcategory=Characters
     //% group=Inventory
-    //% weight=50
+    //% weight=40
+    //% blockGap=8
     export function countInInventory(character: Entity, item: string): number {
         _assertCharacter(character, "countInInventory");
 
@@ -304,6 +315,7 @@ namespace rpg {
     //% subcategory=Characters
     //% group=Party
     //% weight=100
+    //% blockGap=8
     export function addToParty(character: Entity, party: number): void {
         _assertCharacter(character, "addToParty");
 
@@ -315,12 +327,29 @@ namespace rpg {
         }
     }
 
+    //% blockId=rpg_character_removeFromParty
+    //% block="remove $party character with name $name"
+    //% party.shadow=rpg_partyType
+    //% name.shadow=rpg_characterNameShadow
+    //% subcategory=Characters
+    //% group=Party
+    //% weight=90
+    export function removeFromParty(party: number, name: string): void {
+        if (party === PartyType.Player) {
+            _globalState().playerParty.removeByName(name);
+        }
+        else {
+            _globalState().enemyParty.removeByName(name);
+        }
+    }
+
     //% blockId=rpg_character_getParty
     //% block="get characters in $party"
     //% party.shadow=rpg_partyType
     //% subcategory=Characters
     //% group=Party
-    //% weight=90
+    //% weight=80
+    //% blockGap=8
     export function getParty(party: number): Entity[] {
         if (party === PartyType.Player) {
             return _globalState().playerParty.getAll();
@@ -336,29 +365,13 @@ namespace rpg {
     //% name.shadow=rpg_characterNameShadow
     //% subcategory=Characters
     //% group=Party
-    //% weight=80
+    //% weight=70
     export function getPartyCharacter(party: number, name: string): Entity {
         if (party === PartyType.Player) {
             return _globalState().playerParty.getByName(name);
         }
         else {
             return _globalState().enemyParty.getByName(name);
-        }
-    }
-
-    //% blockId=rpg_character_removeFromParty
-    //% block="remove $party character with name $name"
-    //% party.shadow=rpg_partyType
-    //% name.shadow=rpg_characterNameShadow
-    //% subcategory=Characters
-    //% group=Party
-    //% weight=70
-    export function removeFromParty(party: number, name: string): void {
-        if (party === PartyType.Player) {
-            _globalState().playerParty.removeByName(name);
-        }
-        else {
-            _globalState().enemyParty.removeByName(name);
         }
     }
 

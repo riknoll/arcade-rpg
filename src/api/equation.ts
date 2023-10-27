@@ -74,6 +74,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Math
     //% weight=100
+    //% blockGap=8
     export function binaryExpression(op: BinaryOperator, left: rpg.equation.ExpressionNode | number, right: rpg.equation.ExpressionNode | number): rpg.equation.ExpressionNode {
         return new rpg.equation.BinaryExpression(op, rpg.equation.wrapNode(left), rpg.equation.wrapNode(right));
     }
@@ -84,6 +85,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Math
     //% weight=90
+    //% blockGap=8
     export function unaryExpression(op: UnaryOperator, expr: rpg.equation.ExpressionNode | number): rpg.equation.ExpressionNode {
         return new rpg.equation.UnaryExpression(op, rpg.equation.wrapNode(expr));
     }
@@ -95,6 +97,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Math
     //% weight=80
+    //% blockGap=8
     export function randomRangeExpression(min: rpg.equation.ExpressionNode | number, max: rpg.equation.ExpressionNode | number): rpg.equation.ExpressionNode {
         return new rpg.equation.RandomRangeNode(rpg.equation.wrapNode(min), rpg.equation.wrapNode(max));
     }
@@ -106,6 +109,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Entity
     //% weight=100
+    //% blockGap=8
     export function statExpression(owner: rpg.equation.EntityExpressionNode, stat: string): rpg.equation.ExpressionNode {
         return new rpg.equation.StatNode(owner, stat);
     }
@@ -116,6 +120,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Entity
     //% weight=90
+    //% blockGap=8
     export function entityValueExpression(owner: rpg.equation.EntityExpressionNode, kind: EntityValue): rpg.equation.ExpressionNode {
         return new rpg.equation.EntityValueNode(owner, kind);
     }
@@ -127,6 +132,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Entity
     //% weight=80
+    //% blockGap=8
     export function entityNumberDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.ExpressionNode {
         return new rpg.equation.NumberDataNode(owner, key);
     }
@@ -136,6 +142,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Entity
     //% weight=70
+    //% blockGap=8
     export function participantExpression(owner: ParticipantType): rpg.equation.EntityExpressionNode {
         return new rpg.equation.ParticipantExpression(owner);
     }
@@ -147,6 +154,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Entity
     //% weight=60
+    //% blockGap=8
     export function equipmentExpression(owner: rpg.equation.EntityExpressionNode, equipSlot: string): rpg.equation.EntityExpressionNode {
         return new rpg.equation.EquipmentExpression(owner, equipSlot);
     }
@@ -158,6 +166,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Entity
     //% weight=50
+    //% blockGap=8
     export function entityEntityDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.EntityExpressionNode {
         return new rpg.equation.EntityDataExpression(owner, key);
     }
@@ -170,6 +179,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Logic
     //% weight=100
+    //% blockGap=8
     export function ternaryExpression(condition: rpg.equation.LogicalExpressionNode, ifTrue: rpg.equation.ExpressionNode | number, ifFalse: rpg.equation.ExpressionNode | number): rpg.equation.ExpressionNode {
         return new rpg.equation.TernaryExpression(condition, rpg.equation.wrapNode(ifTrue), rpg.equation.wrapNode(ifFalse));
     }
@@ -181,6 +191,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Logic
     //% weight=90
+    //% blockGap=8
     export function comparisonExpression(op: ComparisonOperator, left: rpg.equation.ExpressionNode | number, right: rpg.equation.ExpressionNode | number): rpg.equation.LogicalExpressionNode {
         return new rpg.equation.ComparisonExpression(op, rpg.equation.wrapNode(left), rpg.equation.wrapNode(right));
     }
@@ -192,6 +203,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Logic
     //% weight=80
+    //% blockGap=8
     export function binaryLogicExpression(op: BinaryLogicOperator, left: rpg.equation.LogicalExpressionNode, right: rpg.equation.LogicalExpressionNode): rpg.equation.LogicalExpressionNode {
         return new rpg.equation.BinaryLogicExpression(op, left, right);
     }
@@ -202,6 +214,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Logic
     //% weight=70
+    //% blockGap=8
     export function notExpression(expr: rpg.equation.LogicalExpressionNode): rpg.equation.LogicalExpressionNode {
         return new rpg.equation.NotExpression(expr);
     }
@@ -213,6 +226,7 @@ namespace rpg {
     //% subcategory=Equation
     //% group=Logic
     //% weight=60
+    //% blockGap=8
     export function entityBooleanDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.LogicalExpressionNode {
         return new rpg.equation.BooleanDataExpression(owner, key);
     }

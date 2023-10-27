@@ -145,6 +145,7 @@ namespace rpg {
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=100
+    //% blockGap=8
     export function showPartyMenu(party: number, region: number) {
         rpg.ui._state().showEntityMenu(getParty(party), region);
         rpg.ui._state().pauseUntilMenuSelection();
@@ -157,6 +158,7 @@ namespace rpg {
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=90
+    //% blockGap=8
     export function showSkillMenu(character: Entity, region: number) {
         _assertCharacter(character, "showSkillMenu");
 
@@ -171,6 +173,7 @@ namespace rpg {
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=80
+    //% blockGap=8
     export function showEquipMenu(character: Entity, region: number) {
         _assertCharacter(character, "showEquipMenu");
 
@@ -185,6 +188,7 @@ namespace rpg {
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=70
+    //% blockGap=8
     export function showInventoryMenu(character: Entity, region: number) {
         _assertCharacter(character, "showInventoryMenu");
 
@@ -197,6 +201,7 @@ namespace rpg {
     //% subcategory=UI
     //% group="Text Log"
     //% weight=100
+    //% blockGap=8
     export function printToTextLog(text: string) {
         rpg.ui.log.print(text);
     }

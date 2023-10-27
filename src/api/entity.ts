@@ -13,6 +13,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Create
     //% weight=200
+    //% blockGap=8
     export function createEntity(name: string) {
         const result = new Entity();
         result.name = name;
@@ -42,6 +43,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Stats
     //% weight=100
+    //% blockGap=8
     export function setStat(entity: Entity, stat: string, kind: StatKind, value: number) {
         if (kind === StatKind.GrowthRate) {
             entity.growthRates.setStat(stat, value);
@@ -61,6 +63,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Stats
     //% weight=90
+    //% blockGap=8
     export function changeStat(entity: Entity, stat: string, kind: StatKind, value: number) {
         if (kind === StatKind.GrowthRate) {
             entity.growthRates.changeStat(stat, value);
@@ -97,6 +100,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Stats
     //% weight=70
+    //% blockGap=8
     export function setValue(entity: Entity, value: EntityValue, val: number) {
         switch (value) {
             case EntityValue.Health:
@@ -118,6 +122,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Stats
     //% weight=60
+    //% blockGap=8
     export function changeValueBy(entity: Entity, value: EntityValue, val: number) {
         setValue(entity, value, getValue(entity, value) + val);
     }
@@ -164,6 +169,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Stats
     //% weight=30
+    //% blockGap=8
     export function setName(entity: Entity, name: string): void {
         entity.name = name;
     }
@@ -186,6 +192,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Damage
     //% weight=100
+    //% blockGap=8
     export function setDamageEquation(entity: Entity, equation: rpg.equation.ExpressionNode | number) {
         entity.damage = rpg.equation.wrapNode(equation);
     }
@@ -199,6 +206,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Damage
     //% weight=90
+    //% blockGap=8
     export function dealDamage(attacker: Entity, defender: Entity) {
         const damage = rpg.equation.evaluateDamageExpression(attacker.damage, defender, attacker, attacker);
         defender.health = Math.max(defender.health - damage, 0);
@@ -215,6 +223,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Damage
     //% weight=80
+    //% blockGap=8
     export function dealDamageWith(attacker: Entity, damageSource: Entity, defender: Entity) {
         const damage = rpg.equation.evaluateDamageExpression(damageSource.damage, defender, damageSource, attacker);
         defender.health = Math.max(defender.health - damage, 0);
@@ -244,6 +253,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Sprites
     //% weight=100
+    //% blockGap=8
     export function attachToSprite(entity: Entity, sprite: Sprite) {
         if (sprite) {
             sprite.data["$attached_entity"] = entity;
@@ -260,6 +270,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Sprites
     //% weight=90
+    //% blockGap=8
     export function getAttachedEntity(sprite: Sprite): Entity {
         return sprite.data["$attached_entity"];
     }
@@ -271,6 +282,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Sprites
     //% weight=80
+    //% blockGap=8
     export function getAttachedSprite(entity: Entity): Sprite {
         return entity.attachedSprite;
     }
@@ -284,6 +296,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Arrays
     //% weight=100
+    //% blockGap=8
     export function sortByStat(entities: Entity[], stat: string, ascending = true) {
         const result = entities.slice();
 
@@ -304,6 +317,7 @@ namespace rpg {
     //% subcategory=Entity
     //% group=Arrays
     //% weight=90
+    //% blockGap=8
     export function sortByValue(entities: Entity[], value: EntityValue, ascending = true) {
         const result = entities.slice();
 
