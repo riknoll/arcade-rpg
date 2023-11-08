@@ -376,6 +376,31 @@ namespace rpg {
         return result;
     }
 
+    //% blockId=rpg_entity_filterByBooleanData
+    //% block="filter $entities by boolean data $key"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% key.shadow=rpg_dataBooleanKeyShadow
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=60
+    //% blockGap=8
+    export function filterByBooleanData(entities: Entity[], key: string) {
+        return entities.filter(e => dataGetBoolean(e, key));
+    }
+
+    //% blockId=rpg_entity_filterByBooleanData
+    //% block="filter $entities by has status $status"
+    //% entities.shadow=variables_get
+    //% entities.defl=entityList
+    //% status.shadow=rpg_statusNameShadow
+    //% subcategory=Entity
+    //% group=Arrays
+    //% weight=50
+    export function filterByStatus(entities: Entity[], status: string) {
+        return entities.filter(e => hasStatus(e, status));
+    }
+
     //% blockId=rpg_entity_concat
     //% block="concatenate $a and $b"
     //% a.shadow=variables_get
