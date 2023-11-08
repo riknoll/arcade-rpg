@@ -11,11 +11,32 @@ namespace rpg {
             this.equipment = new Equipment();
         }
 
+        getStat(key: string) {
+            let current = this._stats.getStat(key);
+
+            for (const equip of this.equipment.getAll()) {
+                current += equip.getStat(key);
+            }
+
+            let allEffects: Modifier[] = [];
+
+            for (const status of this.statusEffects) {
+                allEffects = allEffects.concat(status.getStatModifiers(key))
+            }
+
+            _sortStatusModifiers(allEffects);
+
+            for (const mod of allEffects) {
+                current = mod.apply(current);
+            }
+
+            return current;
+        }
 
         clone(deep?: boolean) {
             const result = new Character();
             result.name = this.name;
-            result.stats = this.stats.clone();
+            result._stats = this._stats.clone();
             result.growthRates = this.growthRates.clone();
             result.level = this.level;
             result.health = this.health;

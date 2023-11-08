@@ -28,7 +28,7 @@ namespace rpg {
                 }
             }
 
-            return -1;
+            return 0;
         }
 
         hasStat(kind: string) {

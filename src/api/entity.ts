@@ -49,7 +49,7 @@ namespace rpg {
             entity.growthRates.setStat(stat, value);
         }
         else {
-            entity.stats.setStat(stat, value);
+            entity.setStat(stat, value);
         }
     }
 
@@ -69,7 +69,7 @@ namespace rpg {
             entity.growthRates.changeStat(stat, value);
         }
         else {
-            entity.stats.changeStat(stat, value);
+            entity.changeStat(stat, value);
         }
     }
 
@@ -88,7 +88,7 @@ namespace rpg {
             return entity.growthRates.getStat(stat);
         }
         else {
-            return entity.stats.getStat(stat);
+            return entity.getStat(stat);
         }
     }
 
@@ -241,7 +241,12 @@ namespace rpg {
     //% group=Damage
     //% weight=70
     export function calculateDamage(attacker: Entity, defender: Entity, damageSource?: Entity): number {
-        return rpg.equation.evaluateDamageExpression(damageSource.damage, defender, damageSource, attacker);
+        if (damageSource) {
+            return rpg.equation.evaluateDamageExpression(damageSource.damage, defender, damageSource, attacker);
+        }
+        else {
+            return rpg.equation.evaluateDamageExpression(attacker.damage, defender, damageSource, attacker);
+        }
     }
 
     //% blockId=rpg_entity_attachToSprite
@@ -300,7 +305,7 @@ namespace rpg {
     export function sortByStat(entities: Entity[], stat: string, ascending = true) {
         const result = entities.slice();
 
-        result.sort((a, b) => a.stats.getStat(stat) - b.stats.getStat(stat));
+        result.sort((a, b) => a.getStat(stat) - b.getStat(stat));
 
         if (!ascending) {
             result.reverse();

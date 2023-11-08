@@ -112,8 +112,8 @@ namespace rpg.ui {
                 break;
             case DisplayType.Stats:
                 result.setColumns([
-                    source.stats.keys(),
-                    source.stats.keys().map(key => source.stats.getStat(key) + "")
+                    source._stats.keys(),
+                    source._stats.keys().map(key => source._stats.getStat(key) + "")
                 ]);
                 break;
             case DisplayType.Skills:

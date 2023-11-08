@@ -230,4 +230,16 @@ namespace rpg {
     export function entityBooleanDataExpression(owner: rpg.equation.EntityExpressionNode, key: string): rpg.equation.LogicalExpressionNode {
         return new rpg.equation.BooleanDataExpression(owner, key);
     }
+
+    //% blockId=rpg_equation_entityHasStatusExpression
+    //% block="$owner has status $key"
+    //% owner.shadow=rpg_equation_participantExpression
+    //% status.shadow=rpg_statusNameShadow
+    //% subcategory=Equation
+    //% group=Logic
+    //% weight=50
+    //% blockGap=8
+    export function entityHasStatusExpression(owner: rpg.equation.EntityExpressionNode, status: string): rpg.equation.LogicalExpressionNode {
+        return new rpg.equation.HasStatusExpression(owner, status);
+    }
 }

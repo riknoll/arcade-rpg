@@ -14,7 +14,8 @@ namespace rpg.equation {
         ComparisonExpression,
         BinaryLogicExpression,
         NotExpression,
-        BooleanData
+        BooleanData,
+        HasStatusExpression
     }
 
     export enum EntityExpressionNodeKind {
@@ -105,6 +106,12 @@ namespace rpg.equation {
         }
     }
 
+    export class HasStatusExpression extends LogicalExpressionNode {
+        constructor(public owner: EntityExpressionNode, public status: string) {
+            super(LogicalExpressionNodeKind.HasStatusExpression);
+        }
+    }
+
     export class EntityExpressionNode {
         constructor(public kind: EntityExpressionNodeKind) {
         }
@@ -137,7 +144,7 @@ namespace rpg.equation {
                 if (!owner) {
                     return 0;
                 }
-                return owner.stats.getStat((expr as StatNode).statKind);
+                return owner.getStat((expr as StatNode).statKind);
             case ExpressionNodeKind.EntityValue:
                 const eOwner = evaluateEntityExpression((expr as EntityValueNode).owner, defender, damageSource, attacker);
                 if (!eOwner) {
@@ -243,6 +250,12 @@ namespace rpg.equation {
                     return false;
                 }
                 return !!rpg.data.getBoolean(dOwner, (expr as BooleanDataExpression).key);
+            case LogicalExpressionNodeKind.HasStatusExpression:
+                const sOwner = evaluateEntityExpression((expr as HasStatusExpression).owner, defender, damageSource, attacker);
+                if (!sOwner) {
+                    return false;
+                }
+                return sOwner.hasStatus((expr as HasStatusExpression).status)
         }
 
         return false;

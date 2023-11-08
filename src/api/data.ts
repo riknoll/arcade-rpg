@@ -1,8 +1,7 @@
 namespace rpg {
     //% blockId=rpg_data_dataSetNumber
     //% block="set $entity data $key to number $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataNumberKeyShadow
     //% subcategory=Data
     //% group=Number
@@ -14,8 +13,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataChangeNumber
     //% block="change $entity data $key by number $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataNumberKeyShadow
     //% subcategory=Data
     //% group=Number
@@ -28,8 +26,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetNumber
     //% block="$entity data $key as number"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataNumberKeyShadow
     //% subcategory=Data
     //% group=Number
@@ -41,8 +38,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetString
     //% block="set $entity data $key to string $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataStringKeyShadow
     //% subcategory=Data
     //% group=String
@@ -54,8 +50,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetString
     //% block="$entity data $key as string"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataStringKeyShadow
     //% subcategory=Data
     //% group=String
@@ -67,8 +62,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetBoolean
     //% block="set $entity data $key to boolean $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataBooleanKeyShadow
     //% subcategory=Data
     //% group=Boolean
@@ -80,8 +74,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetBoolean
     //% block="$entity data $key as boolean"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataBooleanKeyShadow
     //% subcategory=Data
     //% group=Boolean
@@ -93,8 +86,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetImage
     //% block="set $entity data $key to image $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% value.shadow=screen_image_picker
     //% key.shadow=rpg_dataImageKeyShadow
     //% subcategory=Data
@@ -107,8 +99,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetImage
     //% block="$entity data $key as image"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataImageKeyShadow
     //% subcategory=Data
     //% group=Image
@@ -120,8 +111,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetLocation
     //% block="set $entity data $key to location $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataLocationKeyShadow
     //% value.shadow=mapgettile
     //% subcategory=Data
@@ -134,8 +124,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetLocation
     //% block="$entity data $key as location"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataLocationKeyShadow
     //% subcategory=Data
     //% group=Location
@@ -147,8 +136,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetSprite
     //% block="set $entity data $key to sprite $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataSpriteKeyShadow
     //% subcategory=Data
     //% group=Sprite
@@ -160,8 +148,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetSprite
     //% block="$entity data $key as sprite"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataSpriteKeyShadow
     //% subcategory=Data
     //% group=Sprite
@@ -173,8 +160,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetEntity
     //% block="set $entity data $key to entity $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataEntityKeyShadow
     //% subcategory=Data
     //% group=Entity
@@ -186,8 +172,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetEntity
     //% block="$entity data $key as entity"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataEntityKeyShadow
     //% subcategory=Data
     //% group=Entity
@@ -199,8 +184,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataSetTilemap
     //% block="set $entity data $key to tilemap $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataTilemapKeyShadow
     //% subcategory=Data
     //% group=Tilemap
@@ -212,8 +196,7 @@ namespace rpg {
 
     //% blockId=rpg_data_dataGetTilemap
     //% block="$entity data $key as tilemap"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% key.shadow=rpg_dataTilemapKeyShadow
     //% subcategory=Data
     //% group=Tilemap

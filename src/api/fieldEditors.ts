@@ -142,4 +142,13 @@ namespace rpg {
     export function _screenRegion(region: ScreenRegion): number {
         return region;
     }
+
+    //% block="$name"
+    //% blockId=rpg_statusNameShadow
+    //% blockHidden=true shim=TD_ID
+    //% name.fieldEditor="autocomplete" name.fieldOptions.decompileLiterals=true
+    //% name.fieldOptions.key="_statusNameShadow"
+    export function _statusNameShadow(name: string) {
+        return name
+    }
 }
