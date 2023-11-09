@@ -22,8 +22,7 @@ namespace rpg {
 
     //% blockId=rpg_clone_entity
     //% block="clone entity $entity||and all children $deep"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% deep.defl=false
     //% inlineInputMode=inline
     //% subcategory=Entity
@@ -33,16 +32,50 @@ namespace rpg {
         return entity.clone(deep);
     }
 
+    //% blockId=rpg_entity_setStats
+    //% block="set $entity $kind $stat1||$stat2 $stat3 $stat4 $stat5 $stat6 $stat7 $stat8 $stat9"
+    //% entity.shadow=rpg_character_character
+    //% stat1.shadow=rpg_statShadow
+    //% stat2.shadow=rpg_statShadow
+    //% stat3.shadow=rpg_statShadow
+    //% stat4.shadow=rpg_statShadow
+    //% stat5.shadow=rpg_statShadow
+    //% stat6.shadow=rpg_statShadow
+    //% stat7.shadow=rpg_statShadow
+    //% stat8.shadow=rpg_statShadow
+    //% stat9.shadow=rpg_statShadow
+    //% stat.defl="attack"
+    //% subcategory=Entity
+    //% group=Stats
+    //% weight=100
+    //% blockGap=8
+    export function setStats(entity: Entity, kind: StatKind, stat1: Stat, stat2?: Stat, stat3?: Stat, stat4?: Stat, stat5?: Stat, stat6?: Stat, stat7?: Stat, stat8?: Stat, stat9?: Stat) {
+        const all = [
+            stat1,
+            stat2,
+            stat3,
+            stat4,
+            stat5,
+            stat6,
+            stat7,
+            stat8,
+            stat9
+        ];
+
+        for (const stat of all) {
+            if (stat) setStat(entity, stat.kind, kind, stat.value);
+        }
+    }
+
     //% blockId=rpg_entity_setStat
     //% block="set $entity $stat $kind to $value"
     //% stat.shadow=rpg_statNameShadow
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% stat.defl="attack"
     //% inlineInputMode=inline
     //% subcategory=Entity
     //% group=Stats
-    //% weight=100
+    //% weight=95
     //% blockGap=8
     export function setStat(entity: Entity, stat: string, kind: StatKind, value: number) {
         if (kind === StatKind.GrowthRate) {
@@ -56,8 +89,7 @@ namespace rpg {
     //% blockId=rpg_entity_changeStat
     //% block="change $entity $stat $kind by $value"
     //% stat.shadow=rpg_statNameShadow
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% stat.defl="attack"
     //% inlineInputMode=inline
     //% subcategory=Entity
@@ -76,8 +108,7 @@ namespace rpg {
     //% blockId=rpg_entity_getStat
     //% block="$entity $stat $kind"
     //% stat.shadow=rpg_statNameShadow
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% stat.defl="attack"
     //% inlineInputMode=inline
     //% subcategory=Entity
@@ -94,8 +125,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_setValue
     //% block="$entity set $value to $val"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% inlineInputMode=inline
     //% subcategory=Entity
     //% group=Stats
@@ -117,8 +147,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_changeValueBy
     //% block="$entity change $value by $val"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% subcategory=Entity
     //% group=Stats
     //% weight=60
@@ -129,8 +158,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_getValue
     //% block="$entity $value"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% subcategory=Entity
     //% group=Stats
     //% weight=50
@@ -147,8 +175,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_levelUp
     //% block="$entity level up||by $levels levels"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% levels.defl=1
     //% subcategory=Entity
     //% group=Stats
@@ -164,8 +191,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_setName
     //% block="$entity set name to $name"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% subcategory=Entity
     //% group=Stats
     //% weight=30
@@ -176,8 +202,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_getName
     //% block="$entity name"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% subcategory=Entity
     //% group=Stats
     //% weight=20
@@ -187,8 +212,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_setDamageEquation
     //% block="$entity set damage equation to $equation"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% subcategory=Entity
     //% group=Damage
     //% weight=100
@@ -251,8 +275,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_attachToSprite
     //% block="attach $entity to $sprite"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% sprite.shadow=variables_get
     //% sprite.defl=mySprite
     //% subcategory=Entity
@@ -282,8 +305,7 @@ namespace rpg {
 
     //% blockId=rpg_entity_getAttachedSprite
     //% block="$entity attached sprite"
-    //% entity.shadow=variables_get
-    //% entity.defl=myEntity
+    //% entity.shadow=rpg_character_character
     //% subcategory=Entity
     //% group=Sprites
     //% weight=80

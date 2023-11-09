@@ -1,6 +1,6 @@
 {
     "name": "arcade-rpg",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "files": [
         "main.ts",
         "src/util.ts",
@@ -19,13 +19,21 @@
         "src/ui/frameSprite.ts",
         "src/ui/displaySprite.ts",
         "src/ui/textLog.ts",
+        "src/hud/hudSprite.ts",
+        "src/hud/numberSprite.ts",
+        "src/hud/counterSprite.ts",
+        "src/hud/labelSprite.ts",
+        "src/hud/numberTextSprite.ts",
+        "src/hud/rectSprite.ts",
+        "src/hud/barSprite.ts",
         "src/api/character.ts",
         "src/api/equation.ts",
         "src/api/ui.ts",
         "src/api/fieldEditors.ts",
         "src/api/entity.ts",
         "src/api/data.ts",
-        "src/api/status.ts"
+        "src/api/status.ts",
+        "src/api/hud.ts"
     ],
     "testFiles": [
         "test.ts"

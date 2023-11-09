@@ -151,4 +151,12 @@ namespace rpg {
     export function _statusNameShadow(name: string) {
         return name
     }
+
+    //% block="$name = $value"
+    //% blockId=rpg_statShadow
+    //% blockHidden=true
+    //% name.shadow=rpg_statNameShadow
+    export function _statShadow(name: string, value: number): Stat {
+        return new Stat(name, value);
+    }
 }

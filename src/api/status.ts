@@ -65,7 +65,7 @@ namespace rpg {
     }
 
     //% blockId=rpg_status_setRemovalChance
-    //% block="$status set removal chance to $value percent"
+    //% block="$status set removal chance to $chance percent"
     //% status.shadow=variables_get
     //% status.defl=myStatus
     //% subcategory=Status
