@@ -21,6 +21,7 @@ namespace rpg.hud {
             this.font = image.font8
             this.setDigits(3);
             this.animationState = [];
+            this.color = 15;
 
             for (let i = 0; i < this.digits; i++) {
                 this.animationState.push(0);
@@ -38,8 +39,8 @@ namespace rpg.hud {
             this.digits = digits;
 
             this.setDimensions(
+                this.digits * (this.font.charWidth + 2 + BOX_SPACING) - BOX_SPACING,
                 this.font.charHeight + 2,
-                this.digits * (this.font.charWidth + 2 + BOX_SPACING) - BOX_SPACING
             );
         }
 
