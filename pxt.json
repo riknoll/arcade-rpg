@@ -1,6 +1,6 @@
 {
     "name": "arcade-rpg",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "files": [
         "main.ts",
         "src/util.ts",
