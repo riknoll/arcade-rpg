@@ -95,11 +95,6 @@ namespace rpg.ui {
                 this.buttonPressed = true;
             })
 
-            menu.onButtonPressed(controller.B, (selection, index) => {
-                this.lastSelectedOption = undefined;
-                this.buttonPressed = true;
-            })
-
             menu.setMenuItems(options.map(opt => new miniMenu.MenuItem(opt, undefined)));
 
             if (this.menuStack.length) {

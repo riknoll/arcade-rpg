@@ -15,6 +15,7 @@
         "src/status.ts",
         "src/ui/state.ts",
         "src/ui/region.ts",
+        "src/ui/menuBuilder.ts",
         "src/ui/compoundSprite.ts",
         "src/ui/frameSprite.ts",
         "src/ui/displaySprite.ts",

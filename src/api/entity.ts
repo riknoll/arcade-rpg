@@ -411,7 +411,7 @@ namespace rpg {
         return entities.filter(e => dataGetBoolean(e, key));
     }
 
-    //% blockId=rpg_entity_filterByBooleanData
+    //% blockId=rpg_entity_filterByStatus
     //% block="filter $entities by has status $status"
     //% entities.shadow=variables_get
     //% entities.defl=entityList

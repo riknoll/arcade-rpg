@@ -60,12 +60,15 @@ namespace rpg {
     //% entities.shadow=variables_get
     //% entities.defl=entityList
     //% region.shadow=rpg_screenRegion
+    //% handlerStatement=1
+    //% draggableParameters="reporter"
     //% subcategory=UI
     //% group=Menu
     //% weight=95
-    export function showEntityMenu(entities: Entity[], region: number) {
+    export function showEntityMenu(entities: Entity[], region: number, handler: (selectedEntity: Entity) => void) {
         rpg.ui._state().showEntityMenu(entities, region);
         rpg.ui._state().pauseUntilMenuSelection();
+        handler(rpg.ui._state().getLastSelectedEntity());
     }
 
     //% blockId=rpg_ui_getMenuSelectionString
@@ -116,6 +119,32 @@ namespace rpg {
         rpg.ui._state().closeAllMenus();
     }
 
+    //% blockId=rpg_ui_showMultipleChoiceMenu
+    //% block="show multiple choice in $region with $menuBuilder"
+    //% region.shadow=rpg_screenRegion
+    //% handlerStatement=1
+    //% draggableParameters="reporter"
+    //% subcategory=UI
+    //% group="Multiple Choice"
+    //% weight=95
+    export function showMultipleChoiceMenu(region: number, handler: (menuBuilder: rpg.ui.MenuBuilder) => void) {
+        const builder = new rpg.ui.MenuBuilder();
+        handler(builder);
+        builder.show(region);
+    }
+
+    //% blockId=rpg_ui_addMultipleChoiceOption
+    //% block="$menuBuilder add option $option"
+    //% menuBuilder.shadow=variables_get
+    //% menuBuilder.defl=menuBuilder
+    //% handlerStatement=1
+    //% subcategory=UI
+    //% group="Multiple Choice"
+    //% weight=90
+    export function addMultipleChoiceOption(menuBuilder: rpg.ui.MenuBuilder, option: string, handler: () => void) {
+        menuBuilder.addItem(option, handler);
+    }
+
     //% blockId=rpg_ui_showDisplay
     //% block="show display of $source $type in $region"
     //% source.shadow=variables_get
@@ -142,58 +171,62 @@ namespace rpg {
     //% block="show $party party menu in $region"
     //% party.shadow=rpg_partyType
     //% region.shadow=rpg_screenRegion
+    //% handlerStatement=1
+    //% draggableParameters="reporter"
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=100
     //% blockGap=8
-    export function showPartyMenu(party: number, region: number) {
-        rpg.ui._state().showEntityMenu(getParty(party), region);
-        rpg.ui._state().pauseUntilMenuSelection();
+    export function showPartyMenu(party: number, region: number, handler: (selectedCharacter: Entity) => void) {
+        showEntityMenu(getParty(party), region, handler);
     }
 
     //% blockId=rpg_ui_showSkillMenu
     //% block="show skill menu for $character in $region"
     //% character.shadow=rpg_character_character
     //% region.shadow=rpg_screenRegion
+    //% handlerStatement=1
+    //% draggableParameters="reporter"
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=90
     //% blockGap=8
-    export function showSkillMenu(character: Entity, region: number) {
+    export function showSkillMenu(character: Entity, region: number, handler: (selectedSkill: Entity) => void) {
         _assertCharacter(character, "showSkillMenu");
 
-        rpg.ui._state().showEntityMenu((character as Character).skills.getAll(), region);
-        rpg.ui._state().pauseUntilMenuSelection();
+        showEntityMenu((character as Character).skills.getAll(), region, handler);
     }
 
     //% blockId=rpg_ui_showEquipMenu
     //% block="show equip menu for $character in $region"
     //% character.shadow=rpg_character_character
     //% region.shadow=rpg_screenRegion
+    //% handlerStatement=1
+    //% draggableParameters="reporter"
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=80
     //% blockGap=8
-    export function showEquipMenu(character: Entity, region: number) {
+    export function showEquipMenu(character: Entity, region: number, handler: (selectedEquip: Entity) => void) {
         _assertCharacter(character, "showEquipMenu");
 
-        rpg.ui._state().showEntityMenu((character as Character).equipment.getAll(), region);
-        rpg.ui._state().pauseUntilMenuSelection();
+        showEntityMenu((character as Character).equipment.getAll(), region, handler);
     }
 
     //% blockId=rpg_ui_showInventoryMenu
     //% block="show inventory menu for $character in $region"
     //% character.shadow=rpg_character_character
     //% region.shadow=rpg_screenRegion
+    //% handlerStatement=1
+    //% draggableParameters="reporter"
     //% subcategory=UI
     //% group="Character Menus"
     //% weight=70
     //% blockGap=8
-    export function showInventoryMenu(character: Entity, region: number) {
+    export function showInventoryMenu(character: Entity, region: number, handler: (selectedItem: Entity) => void) {
         _assertCharacter(character, "showInventoryMenu");
 
-        rpg.ui._state().showEntityMenu((character as Character).inventory.getAll(), region);
-        rpg.ui._state().pauseUntilMenuSelection();
+        showEntityMenu((character as Character).inventory.getAll(), region, handler);
     }
 
     //% blockId=rpg_ui_printToTextLog
